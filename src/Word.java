@@ -1,0 +1,27 @@
+import java.util.List;
+
+public class Word {
+    private String name;
+    private List<TypeOfWord> typeOfWord;
+
+    public Word(String name, List<TypeOfWord> typeOfWord) {
+        this.name = name;
+        this.typeOfWord = typeOfWord;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<TypeOfWord> getTypeOfWord() {
+        return typeOfWord;
+    }
+
+    public void setTypeOfWord(List<TypeOfWord> typeOfWord) {
+        this.typeOfWord = typeOfWord;
+    }
+}
