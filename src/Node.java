@@ -9,6 +9,11 @@ public class Node {
         this.right = right;
     }
 
+    public Node(Node node){
+        this.word = node.word;
+        this.left = node.left;
+        this.right = node.right;
+    }
     public Word getWord() {
         return word;
     }
