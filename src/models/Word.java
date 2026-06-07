@@ -1,3 +1,5 @@
+package models;
+
 import java.util.List;
 
 public class Word {
@@ -29,5 +31,13 @@ public class Word {
 
     public void setTypeOfWord(List<TypeOfWord> typeOfWord) {
         this.typeOfWord = typeOfWord;
+    }
+
+    @Override
+    public String toString() {
+        return "Word{" +
+                name +
+                ", typeOfWord=" + typeOfWord +
+                '}';
     }
 }

@@ -1,3 +1,5 @@
+package models;
+
 public class Dictionary {
     private Node root;
 
@@ -40,24 +42,24 @@ public class Dictionary {
         // QUAN TRỌNG: Gán lại root của toàn bộ cây bằng kết quả sau khi xóa
         this.root = delete(name, this.root);
     }
-    // Hàm này trả về Node con đã được cập nhật sau khi xóa Node nhỏ nhất
+    // Hàm này trả về models.Node con đã được cập nhật sau khi xóa models.Node nhỏ nhất
     private Node deleteMin(Node root) {
         if (root.getLeft() == null) {
-            // Đây chính là Node nhỏ nhất!
-            // Trả về nhánh bên phải của nó để Node cha nối trực tiếp vào nhánh phải này (bỏ qua Node hiện tại)
+            // Đây chính là models.Node nhỏ nhất!
+            // Trả về nhánh bên phải của nó để models.Node cha nối trực tiếp vào nhánh phải này (bỏ qua models.Node hiện tại)
             return root.getRight();
         }
         // Đệ quy sâu xuống bên trái và cập nhật lại liên kết trái
         root.setLeft(deleteMin(root.getLeft()));
         return root;
     }
-    // Hàm đệ quy trả về Node sau khi đã xóa
+    // Hàm đệ quy trả về models.Node sau khi đã xóa
     public Node delete(String name, Node root) {
         if (root == null) {
-            return null; // Không tìm thấy Node cần xóa
+            return null; // Không tìm thấy models.Node cần xóa
         }
 
-        // 1. Điều hướng tìm Node cần xóa
+        // 1. Điều hướng tìm models.Node cần xóa
         if (name.compareTo(root.getWord().getName()) < 0) {
             root.setLeft(delete(name, root.getLeft()));
         }
@@ -65,9 +67,9 @@ public class Dictionary {
             root.setRight(delete(name, root.getRight()));
         }
 
-        // 2. Đã tìm thấy Node cần xóa (name == root.getWord().getName())
+        // 2. Đã tìm thấy models.Node cần xóa (name == root.getWord().getName())
         else {
-            // Trường hợp 1 & 2: Node có 1 con hoặc không có con nào (Node lá)
+            // Trường hợp 1 & 2: models.Node có 1 con hoặc không có con nào (models.Node lá)
             if (root.getLeft() == null) {
                 return root.getRight(); // Nếu left null, đưa nhánh right lên thay thế (hoặc null nếu cả 2 null)
             }
@@ -75,18 +77,18 @@ public class Dictionary {
                 return root.getLeft();  // Nếu right null, đưa nhánh left lên thay thế
             }
 
-            // Trường hợp 3: Node có cả 2 con
-            // Tìm Word nhỏ nhất ở nhánh bên phải để thay thế vào Node hiện tại
+            // Trường hợp 3: models.Node có cả 2 con
+            // Tìm models.Word nhỏ nhất ở nhánh bên phải để thay thế vào models.Node hiện tại
             Word minWord = getMinWord(root.getRight());
             root.setWord(minWord);
 
-            // Xóa Node nhỏ nhất đó ra khỏi nhánh bên phải
+            // Xóa models.Node nhỏ nhất đó ra khỏi nhánh bên phải
             root.setRight(deleteMin(root.getRight()));
         }
 
         return root; // Trả về root đã cập nhật cho tầng cha
     }
-    // Hàm phụ để lấy nhanh Word nhỏ nhất (phục vụ cho hàm delete)
+    // Hàm phụ để lấy nhanh models.Word nhỏ nhất (phục vụ cho hàm delete)
     private Word getMinWord(Node root) {
         while (root.getLeft() != null) {
             root = root.getLeft();
@@ -117,6 +119,5 @@ public class Dictionary {
         else {
             return search(name, root.getRight());
         }
-
    }
 }

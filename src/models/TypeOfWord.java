@@ -1,3 +1,5 @@
+package models;
+
 public class TypeOfWord {
     private String meaning;
     private String type;
@@ -31,5 +33,14 @@ public class TypeOfWord {
 
     public void setExample(String example) {
         this.example = example;
+    }
+
+    @Override
+    public String toString() {
+        return "TypeOfWord{" +
+                "meaning='" + meaning + '\'' +
+                ", type='" + type + '\'' +
+                ", example='" + example + '\'' +
+                '}';
     }
 }
