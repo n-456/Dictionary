@@ -1,143 +1,122 @@
 public class Dictionary {
     private Node root;
 
+    // Constructor
+    public Dictionary(){}
     public Dictionary(Node root) {
         this.root = root;
     }
 
+    // Getter, setter
     public Node getRoot() {
         return root;
     }
-
     public void setRoot(Node root) {
         this.root = root;
     }
 
-    //----THÊM NODE
-   public void insert(Node node) {
-        // Nếu cây rỗng, nút mới chính là root
+    //----INSERT NODE
+    public void insert(Word word) {
+        this.root = insertRec(word, this.root);
+    }
+    public Node insertRec(Word word, Node root) {
         if (root == null) {
-            root = new Node(node);
-            return;
+            return new Node(word);
         }
 
-        Node current = root;
-        Node parent = null;
-
-        while (true) {
-            parent = current;
-            // Đi sang trái
-            if (node.getWord().getName().compareTo(current.getWord().getName())<0) {
-                current = current.getLeft();
-                if (current == null) {
-                    parent.setLeft(node);
-                    return;
-                }
-            }
-            // Đi sang phải
-            else if (node.getWord().getName().compareTo(current.getWord().getName())>0) {
-                current = current.getRight();
-                if (current == null) {
-                    parent.setRight(node);
-                    return;
-                }
-            }
-            // Nếu giá trị đã tồn tại, bỏ qua (BST thường không chứa giá trị trùng)
-            else {
-                return;
-            }
+        if (word.getName().compareTo(root.getWord().getName()) < 0) {
+            root.setLeft(insertRec(word, root.getLeft()));
         }
+        else if (word.getName().compareTo(root.getWord().getName()) > 0) {
+            root.setRight(insertRec(word, root.getRight()));
+        }
+
+        return root;
     }
 
-    //------XOÁ NODE
-    // Hàm gọi từ bên ngoài
+    //----DELETE NODE
+    // Hàm public gọi từ bên ngoài
     public void delete(String name) {
-        root = deleteRecursive(root, name);
+        // QUAN TRỌNG: Gán lại root của toàn bộ cây bằng kết quả sau khi xóa
+        this.root = delete(name, this.root);
     }
-
-    // Hàm đệ quy xử lý logic xóa
-    private Node deleteRecursive(Node current, String name) {
-        // Trường hợp gốc: Cây rỗng hoặc không tìm thấy nút cần xóa
-        if (current == null) {
-            return null;
+    // Hàm này trả về Node con đã được cập nhật sau khi xóa Node nhỏ nhất
+    private Node deleteMin(Node root) {
+        if (root.getLeft() == null) {
+            // Đây chính là Node nhỏ nhất!
+            // Trả về nhánh bên phải của nó để Node cha nối trực tiếp vào nhánh phải này (bỏ qua Node hiện tại)
+            return root.getRight();
+        }
+        // Đệ quy sâu xuống bên trái và cập nhật lại liên kết trái
+        root.setLeft(deleteMin(root.getLeft()));
+        return root;
+    }
+    // Hàm đệ quy trả về Node sau khi đã xóa
+    public Node delete(String name, Node root) {
+        if (root == null) {
+            return null; // Không tìm thấy Node cần xóa
         }
 
-        // 1. Duyệt cây để tìm nút cần xóa
-        if (name.compareTo(current.getWord().getName()) < 0) {
-            current.setLeft(deleteRecursive(current.getLeft(), name));
-        } else if (name.compareTo(current.getWord().getName()) > 0) {
-            current.setRight(deleteRecursive(current.getRight(), name));
+        // 1. Điều hướng tìm Node cần xóa
+        if (name.compareTo(root.getWord().getName()) < 0) {
+            root.setLeft(delete(name, root.getLeft()));
         }
-        // 2. Đã tìm thấy nút cần xóa (value == current.value)
+        else if (name.compareTo(root.getWord().getName()) > 0) {
+            root.setRight(delete(name, root.getRight()));
+        }
+
+        // 2. Đã tìm thấy Node cần xóa (name == root.getWord().getName())
         else {
-            // TRƯỜNG HỢP 1 & 2: Nút có 1 con hoặc không có con nào
-            if (current.getLeft() == null) {
-                return current.getRight(); // Nếu không có con trái, trả về con phải (có thể là null)
-            } else if (current.getRight() == null) {
-                return current.getLeft();  // Nếu không có con phải, trả về con trái
+            // Trường hợp 1 & 2: Node có 1 con hoặc không có con nào (Node lá)
+            if (root.getLeft() == null) {
+                return root.getRight(); // Nếu left null, đưa nhánh right lên thay thế (hoặc null nếu cả 2 null)
+            }
+            if (root.getRight() == null) {
+                return root.getLeft();  // Nếu right null, đưa nhánh left lên thay thế
             }
 
-            // TRƯỜNG HỢP 3: Nút có cả 2 con
-            // Tìm nút nhỏ nhất bên nhánh phải (In-order Successor)
-            current.getWord().setName(findMinValue(current.getRight()));
+            // Trường hợp 3: Node có cả 2 con
+            // Tìm Word nhỏ nhất ở nhánh bên phải để thay thế vào Node hiện tại
+            Word minWord = getMinWord(root.getRight());
+            root.setWord(minWord);
 
-            // Xóa nút nhỏ nhất đó ở nhánh phải vì đã đem giá trị của nó lên thay thế
-            current.setRight(deleteRecursive(current.getRight(), current.getWord().getName()));
+            // Xóa Node nhỏ nhất đó ra khỏi nhánh bên phải
+            root.setRight(deleteMin(root.getRight()));
         }
 
-        return current;
+        return root; // Trả về root đã cập nhật cho tầng cha
     }
-
-    // Hàm phụ trợ tìm giá trị nhỏ nhất của một nhánh cây
-    private String findMinValue(Node node) {
-        String minValue = node.getWord().getName();
-        while (node.getLeft() != null) {
-            minValue = node.getWord().getName();
-            node = node.getLeft();
+    // Hàm phụ để lấy nhanh Word nhỏ nhất (phục vụ cho hàm delete)
+    private Word getMinWord(Node root) {
+        while (root.getLeft() != null) {
+            root = root.getLeft();
         }
-        return minValue;
+        return root.getWord();
     }
 
-    //------- DUYET TRUNG TU
-    // Hàm gọi từ bên ngoài
-    public void inOrder() {
-        inOrderRecursive(root);
-    }
-
-    // Hàm đệ quy xử lý logic
-    private void inOrderRecursive(Node node) {
-        if (node != null) {
-            // 1. Đi hết sang cây con bên trái
-            inOrderRecursive(node.getLeft());
-
-            // 2. Xử lý/In giá trị của nút hiện tại
-            System.out.println(node.getWord().getName());
-
-            // 3. Đi sang cây con bên phải
-            inOrderRecursive(node.getRight());
+    //---- Duyệt trung tự
+    public void inOrder(Node root) {
+        if (root != null) {
+            inOrder(root.getLeft());
+            System.out.println(root.getWord().getName());
+            inOrder(root.getRight());
         }
     }
 
-    //-----------TÌM NODE
-
-        // Hàm gọi từ bên ngoài, trả về Node nếu tìm thấy, hoặc null nếu không thấy
-        public Node search(String name) {
-            return searchRecursive(root, name);
+    //----SEARCH NODE
+    public Node search(String name, Node root) {
+        if (root == null) {
+                return null;
+        }
+        else if (name.compareTo(root.getWord().getName()) == 0) {
+            return root;
+        }
+        else if (name.compareTo(root.getWord().getName()) < 0) {
+                return search(name, root.getLeft());
+        }
+        else {
+            return search(name, root.getRight());
         }
 
-        // Hàm đệ quy xử lý logic
-        private Node searchRecursive(Node current, String name) {
-            // Trường hợp gốc: nếu cây rỗng hoặc đã tìm thấy nút có giá trị bằng key
-            if (current == null || current.getWord().getName() == name) {
-                return current;
-            }
-
-            // Nếu giá trị cần tìm nhỏ hơn nút hiện tại -> rẽ sang trái
-            if (name.compareTo(current.getWord().getName()) < 0) {
-                return searchRecursive(current.getLeft(), name);
-            }
-
-            // Nếu giá trị cần tìm lớn hơn nút hiện tại -> rẽ sang phải
-            return searchRecursive(current.getRight(), name);
    }
 }

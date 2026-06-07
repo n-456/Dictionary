@@ -3,6 +3,11 @@ public class Node {
     private Node left;
     private Node right;
 
+    public Node(Word word) {
+        this.word = word;
+        left = null;
+        right = null;
+    }
     public Node(Word word, Node left, Node right) {
         this.word = word;
         this.left = left;

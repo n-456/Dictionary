@@ -2,14 +2,57 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Dictionary dictionary = new Dictionary();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        System.out.println("=== 1. THỰC HIỆN THÊM CÁC NÚT (INSERT) ===");
+
+        dictionary.insert(new Word("cat"));
+        dictionary.insert(new Word("bed"));
+        dictionary.insert(new Word("ant"));
+        dictionary.insert(new Word("hen"));
+        dictionary.insert(new Word("see"));
+        dictionary.insert(new Word("pet"));
+
+        System.out.println("Đã thêm thành công");
+
+
+
+
+        System.out.println("\n=== 2. KIỂM TRA DUYỆT CÂY TRUNG THỨ TỰ (IN-ORDER) ===");
+
+        System.out.print("Cây hiện tại (luôn tăng dần): ");
+        dictionary.inOrder(dictionary.getRoot());
+
+
+
+
+        System.out.println("\n=== 3. KIỂM TRA HÀM TÌM KIẾM (SEARCH) ===");
+        String target1 = "hen";
+        String target2 = "sea";
+
+        Node searchResult1 = dictionary.search(target1,dictionary.getRoot());
+        if (searchResult1 != null) {
+            System.out.println("-> Tìm thấy nút mang giá trị: " + searchResult1.getWord().getName());
+        } else {
+            System.out.println("-> Không tìm thấy giá trị " + target1);
         }
+
+        Node searchResult2 = dictionary.search(target2,dictionary.getRoot());
+        if (searchResult2 != null) {
+            System.out.println("-> Tìm thấy nút mang giá trị: " + searchResult2.getWord().getName());
+        } else {
+            System.out.println("-> Không tìm thấy giá trị " + target2);
+        }
+
+
+
+
+        System.out.println("\n=== 4. THỰC HIỆN XÓA NÚT (DELETE) ===");
+
+        System.out.println("- Xóa nút: pen");
+        dictionary.delete("cat",dictionary.getRoot());
+        System.out.println("Cây sau khi xóa");
+        dictionary.inOrder(dictionary.getRoot());
+
     }
 }

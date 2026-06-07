@@ -4,15 +4,21 @@ public class Word {
     private String name;
     private List<TypeOfWord> typeOfWord;
 
+    public Word(String name) {
+        this.name = name;
+    }
+    public Word(List<TypeOfWord> typeOfWord){
+        this.typeOfWord = typeOfWord;
+    }
     public Word(String name, List<TypeOfWord> typeOfWord) {
         this.name = name;
         this.typeOfWord = typeOfWord;
     }
 
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
