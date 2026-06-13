@@ -5,11 +5,13 @@ public class Node {
     private Node left;
     private Node right;
 
+    // Constructor
     public Node(Word word) {
         this.word = word;
         left = null;
         right = null;
     }
+
     public Node(Word word, Node left, Node right) {
         this.word = word;
         this.left = left;
@@ -21,6 +23,8 @@ public class Node {
         this.left = node.left;
         this.right = node.right;
     }
+
+    // Getters, setters
     public Word getWord() {
         return word;
     }

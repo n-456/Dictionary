@@ -6,6 +6,7 @@ public class Word {
     private String name;
     private List<TypeOfWord> typeOfWord;
 
+    // Constructor
     public Word(String name) {
         this.name = name;
     }
@@ -17,10 +18,11 @@ public class Word {
         this.typeOfWord = typeOfWord;
     }
 
-
+    // Getters, setters
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -35,9 +37,8 @@ public class Word {
 
     @Override
     public String toString() {
-        return "Word{" +
-                name +
-                ", typeOfWord=" + typeOfWord +
-                '}';
+        return "\n"   + name +
+               ": \n" + typeOfWord +
+               "\n";
     }
 }

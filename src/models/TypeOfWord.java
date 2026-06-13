@@ -5,12 +5,16 @@ public class TypeOfWord {
     private String type;
     private String example;
 
+
+    // Constructor
     public TypeOfWord (String meaning, String type, String example) {
         this.meaning = meaning;
         this.type = type;
         this.example = example;
     }
 
+
+    // Getters, setters
     public String getMeaning() {
         return meaning;
     }
@@ -35,12 +39,12 @@ public class TypeOfWord {
         this.example = example;
     }
 
+
     @Override
     public String toString() {
-        return "TypeOfWord{" +
-                "meaning='" + meaning + '\'' +
-                ", type='" + type + '\'' +
-                ", example='" + example + '\'' +
-                '}';
+        return "\n(" + type + ") " +
+                meaning +
+                ". EX: " + example + "\n";
     }
+
 }
