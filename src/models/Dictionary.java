@@ -17,6 +17,15 @@ public class Dictionary {
         this.root = root;
     }
 
+    // IN-ORDER
+    public void inOrder(Node root) {
+        if (root != null) {
+            inOrder(root.getLeft());
+            System.out.println(root.getWord().getName());
+            inOrder(root.getRight());
+        }
+    }
+
     // INSERT WORD
     public void insertWord(Word word) {
         this.root = insertRec(word, this.root);
