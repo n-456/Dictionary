@@ -1,9 +1,12 @@
+package models;
+
 import java.util.List;
 
 public class Word {
     private String name;
     private List<TypeOfWord> typeOfWord;
 
+    // Constructor
     public Word(String name) {
         this.name = name;
     }
@@ -15,10 +18,11 @@ public class Word {
         this.typeOfWord = typeOfWord;
     }
 
-
+    // Getters, setters
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -29,5 +33,12 @@ public class Word {
 
     public void setTypeOfWord(List<TypeOfWord> typeOfWord) {
         this.typeOfWord = typeOfWord;
+    }
+
+    @Override
+    public String toString() {
+        return "\n"   + name +
+               ": \n" + typeOfWord +
+               "\n";
     }
 }
