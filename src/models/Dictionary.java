@@ -1,5 +1,8 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Dictionary {
     private Node root;
 
@@ -17,12 +20,39 @@ public class Dictionary {
         this.root = root;
     }
 
+    // PRE-ORDER
+    public void preOrder(Node root) {
+        if (root != null) {
+            System.out.println(root.getWord().getName());
+            preOrder(root.getLeft());
+            preOrder(root.getRight());
+        }
+    }
+
     // IN-ORDER
     public void inOrder(Node root) {
         if (root != null) {
             inOrder(root.getLeft());
             System.out.println(root.getWord().getName());
             inOrder(root.getRight());
+        }
+    }
+
+    // REVERSE IN-ORDER
+    public void reverseInOrder(Node root) {
+        if (root != null) {
+            reverseInOrder(root.getRight());
+            System.out.println(root.getWord().getName());
+            reverseInOrder(root.getLeft());
+        }
+    }
+
+    // POST-ORDER
+    public void postOrder(Node root) {
+        if (root != null) {
+            postOrder(root.getLeft());
+            postOrder(root.getRight());
+            System.out.println(root.getWord().getName());
         }
     }
 
