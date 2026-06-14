@@ -56,6 +56,47 @@ public class Dictionary {
         }
     }
 
+    // SEARCH SUBSTRING WORD
+    public List<Word> searchSubstringWord(String subString) {
+        List<Word> resultList = new ArrayList<>();
+        searchSubstringWordRec(subString.toLowerCase(), this.root, resultList);
+        return resultList;
+    }
+    private void searchSubstringWordRec(String subString, Node root, List<Word> resutlList) {
+        if (root == null) {
+            return;
+        }
+
+        String currentWordName = root.getWord().getName();
+        if (currentWordName.contains(subString)) {
+            resutlList.add(root.getWord());
+        }
+
+        searchSubstringWordRec(subString, root.getLeft(), resutlList);
+        searchSubstringWordRec(subString, root.getRight(), resutlList);
+    }
+
+    // SEARCH WORD
+    public Word searchWord(String keyWord) {
+        Node node = searchRec(keyWord.toLowerCase(), this.root);
+        return (node != null) ? node.getWord() : null;
+    }
+    private Node searchRec(String keyWord, Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        if (keyWord.compareTo(root.getWord().getName()) == 0) {
+            return root;
+        }
+
+        if (keyWord.compareTo(root.getWord().getName()) < 0) {
+            return searchRec(keyWord, root.getLeft());
+        }
+
+        return searchRec(keyWord, root.getRight());
+    }
+
     // INSERT WORD
     public void insertWord(Word word) {
         this.root = insertRec(word, this.root);
