@@ -1,0 +1,266 @@
+[
+  {
+    "name": "set of china",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "bộ gốm sứ",
+        "example": "My grandmother gave me a beautiful set of china."
+      }
+    ]
+  },
+  {
+    "name": "rare breeds section",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "khu giống hiếm",
+        "example": "Visitors can see unusual animals in the rare breeds section."
+      }
+    ]
+  },
+  {
+    "name": "grazing area",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "khu chăn thả",
+        "example": "The cows are feeding in the grazing area."
+      }
+    ]
+  },
+  {
+    "name": "experimental crops area",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "khu trồng trọt thí nghiệm",
+        "example": "Scientists are testing new seeds in the experimental crops area."
+      }
+    ]
+  },
+  {
+    "name": "marsh",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "đầm lầy",
+        "example": "Many birds live in the marsh near the lake."
+      }
+    ]
+  },
+  {
+    "name": "temporarily out of bound to the public",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "đóng cửa tạm thời đối với công chúng",
+        "example": "The park is temporarily out of bound to the public for maintenance."
+      }
+    ]
+  },
+  {
+    "name": "large signs",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "các biển báo lớn",
+        "example": "Large signs show the way to the exit."
+      }
+    ]
+  },
+  {
+    "name": "breed",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "giống loài động vật",
+        "example": "This breed of dog is known for its intelligence."
+      }
+    ]
+  },
+  {
+    "name": "quarantine service",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "dịch vụ kiểm dịch hàng hóa",
+        "example": "All imported animals must go through the quarantine service."
+      }
+    ]
+  },
+  {
+    "name": "infested with mites",
+    "typeOfWord": [
+      {
+        "typeOfWord": [
+          {
+            "type": "Noun",
+            "meaning": "bị nhiễm bọ, ve chó",
+            "example": "The old blanket was infested with mites."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "microscopic creature",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "sinh vật cực nhỏ, kích thước hiển vi",
+        "example": "A drop of water can contain many microscopic creatures."
+      }
+    ]
+  },
+  {
+    "name": "eradicated",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "loại bỏ",
+        "example": "The disease was successfully eradicated in 2010."
+      }
+    ]
+  },
+  {
+    "name": "unemployed",
+    "typeOfWord": [
+      {
+        "type": "Adjective",
+        "meaning": "thất nghiệp",
+        "example": "He has been unemployed for six months."
+      }
+    ]
+  },
+  {
+    "name": "aim",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "mục tiêu",
+        "example": "Her main aim is to become a doctor."
+      }
+    ]
+  },
+  {
+    "name": "reform",
+    "typeOfWord": [
+      {
+        "type": "Pronoun",
+        "meaning": "cải tổ",
+        "example": "The government introduced a new education reform."
+      }
+    ]
+  },
+  {
+    "name": "misrepresented",
+    "typeOfWord": [
+      {
+        "type": "Verb",
+        "meaning": "trình bày sai, làm hiểu sai",
+        "example": "The article misrepresented what the scientist said."
+      }
+    ]
+  },
+  {
+    "name": "press",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "báo chí",
+        "example": "The press reported the story widely."
+      }
+    ]
+  },
+  {
+    "name": "preferences",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "những sự ưa thích",
+        "example": "People have different preferences in music."
+      }
+    ]
+  },
+  {
+    "name": "rationale",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "lý do, cơ sở luận, căn cứ hợp lý",
+        "example": "The rationale for the project is clearly explained."
+      }
+    ]
+  },
+  {
+    "name": "collating",
+    "typeOfWord": [
+      {
+        "type": "Verb",
+        "meaning": "đối chiếu sắp xếp dữ liệu",
+        "example": "The team must collate all the raw data from the experiments"
+      }
+    ]
+  },
+  {
+    "name": "tutor",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "gia sư",
+        "example": "a tutor in a university"
+      }
+    ]
+  },
+  {
+    "name": "pull out",
+    "typeOfWord": [
+      {
+        "type": "Verb",
+        "meaning": "rút khỏi, rút lui khỏi",
+        "example": "people decided to pull out when it came to a second round"
+      }
+    ]
+  },
+  {
+    "name": "undergraduate",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "Sinh viên đại học chưa tốt nghiệp",
+        "example": "Most of undergraduates live in dormitories"
+      }
+    ]
+  },
+  {
+    "name": "reassurance",
+    "typeOfWord": [
+      {
+        "type": "Noun",
+        "meaning": "Sự cam đoan, đảm bảo",
+        "example": "they wanted reassurance that..."
+      }
+    ]
+  },
+  {
+    "name": "traceable",
+    "typeOfWord": [
+      {
+        "type": "Adjective",
+        "meaning": "Có thể truy vết được",
+        "example": "All organic produce must be fully traceable from farm to shelf."
+      }
+    ]
+  },
+  {
+    "name": "bizarre",
+    "typeOfWord": [
+      {
+        "type": "Adjective",
+        "meaning": "Sự kỳ quái",
+        "example": "That party was too bizarre for me!"
+      }
+    ]
+  }
+]
