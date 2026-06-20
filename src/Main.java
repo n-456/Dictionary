@@ -15,10 +15,10 @@ public class Main {
         wordGAO.loadFromFile(dictionary);
         System.out.println("\n=====IN-ORDER=====\n");
         // Result of load from file
-        dictionary.inOrder(dictionary.getRoot());
+        dictionary.printInOrder();
 
         System.out.println("\n=====REVERSE IN-ORDER=====\n");
-        dictionary.reverseInOrder(dictionary.getRoot());
+        dictionary.printReverseInOrder();
 
         System.out.println("\n=====INSERT=====\n");
         // Test insert
