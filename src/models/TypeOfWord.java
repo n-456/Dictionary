@@ -16,7 +16,7 @@ public class TypeOfWord {
 
     // Getters, setters
     public String getMeaning() {
-        return meaning;
+        return (meaning != null) ? meaning : "";
     }
 
     public void setMeaning(String meaning) {
@@ -24,7 +24,7 @@ public class TypeOfWord {
     }
 
     public String getType() {
-        return type;
+        return (type != null) ? type : "";
     }
 
     public void setType(String type) {
@@ -32,7 +32,7 @@ public class TypeOfWord {
     }
 
     public String getExample() {
-        return example;
+        return (example != null) ? example : "";
     }
 
     public void setExample(String example) {

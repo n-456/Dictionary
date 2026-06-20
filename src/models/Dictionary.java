@@ -53,11 +53,9 @@ public class Dictionary {
     // SEARCH SUBSTRING WORD
     public List<Word> searchSubstringWord(String subString) {
         List<Word> resultList = new ArrayList<>();
-        try {
-            searchSubstringWordRec(subString, this.root, resultList);
-        } catch (Exception e){
-            ExceptionHandler.handle(e);
-        }
+        if (subString == null)
+            return null;
+        searchSubstringWordRec(subString, this.root, resultList);
         return resultList;
     }
     private void searchSubstringWordRec(String subString, Node root, List<Word> resutlList) {
@@ -76,13 +74,10 @@ public class Dictionary {
 
     // SEARCH WORD
     public Word searchWord(String keyWord) {
-        try {
-            Node node = searchRec(keyWord, this.root);
-            return (node != null) ? node.getWord() : null;
-        } catch (Exception e){
-            ExceptionHandler.handle(e);
+        if (keyWord == null)
             return null;
-        }
+        Node node = searchRec(keyWord, this.root);
+        return (node != null) ? node.getWord() : null;
     }
     private Node searchRec(String keyWord, Node root) {
         if (root == null) {
@@ -102,12 +97,9 @@ public class Dictionary {
 
     // INSERT WORD
     public void insertWord(Word word) {
-        try {
-            this.root = insertRec(word, this.root);
-        } catch (Exception e) {
-            ExceptionHandler.handle(e);
-        }
-
+        if (word == null)
+            return;
+        this.root = insertRec(word, this.root);
     }
     private Node insertRec(Word word, Node root) {
         if (root == null) {

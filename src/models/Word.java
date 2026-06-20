@@ -20,7 +20,7 @@ public class Word {
 
     // Getters, setters
     public String getName() {
-        return name;
+        return (name != null) ? name : "";
     }
 
     public void setName(String name) {
