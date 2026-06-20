@@ -13,10 +13,10 @@ public class Dictionary {
     }
 
     // Getter, setter
-    public Node getRoot() {
+    private Node getRoot() {
         return root;
     }
-    public void setRoot(Node root) {
+    private void setRoot(Node root) {
         this.root = root;
     }
 
@@ -27,7 +27,10 @@ public class Dictionary {
 
 
     // IN-ORDER
-    public void inOrder(Node root) {
+    public void printInOrder() {
+        inOrder(getRoot());
+    }
+    private void inOrder(Node root) {
         if (root != null) {
             inOrder(root.getLeft());
             System.out.println(root.getWord());
@@ -36,7 +39,10 @@ public class Dictionary {
     }
 
     // REVERSE IN-ORDER
-    public void reverseInOrder(Node root) {
+    public void printReverseInOrder() {
+        reverseInOrder(getRoot());
+    }
+    private void reverseInOrder(Node root) {
         if (root != null) {
             reverseInOrder(root.getRight());
             System.out.println(root.getWord());
