@@ -13,8 +13,12 @@ public class Main {
         //Test load from fiile
         WordGAO wordGAO = new WordGAO("resource/dictionary.json");
         wordGAO.loadFromFile(dictionary);
+        System.out.println("\n=====IN-ORDER=====\n");
         // Result of load from file
         dictionary.inOrder(dictionary.getRoot());
+
+        System.out.println("\n=====REVERSE IN-ORDER=====\n");
+        dictionary.reverseInOrder(dictionary.getRoot());
 
         System.out.println("\n=====INSERT=====\n");
         // Test insert
