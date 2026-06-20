@@ -7,14 +7,8 @@ public class Word {
     private List<TypeOfWord> typeOfWord;
 
     // Constructor
-    public Word(String name) {
-        this.name = name;
-    }
-    public Word(List<TypeOfWord> typeOfWord){
-        this.typeOfWord = typeOfWord;
-    }
     public Word(String name, List<TypeOfWord> typeOfWord) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.typeOfWord = typeOfWord;
     }
 

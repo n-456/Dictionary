@@ -84,11 +84,11 @@ public class Dictionary {
             return null;
         }
 
-        if (keyWord.toLowerCase().compareTo(root.getWord().getName().toLowerCase()) == 0) {
+        if (keyWord.compareToIgnoreCase(root.getWord().getName()) == 0) {
             return root;
         }
 
-        if (keyWord.toLowerCase().compareTo(root.getWord().getName().toLowerCase()) < 0) {
+        if (keyWord.compareTo(root.getWord().getName().toLowerCase()) < 0) {
             return searchRec(keyWord, root.getLeft());
         }
 
@@ -107,7 +107,7 @@ public class Dictionary {
             return new Node(word);
         }
 
-        if (word.getName().toLowerCase().compareTo(root.getWord().getName().toLowerCase()) < 0) {
+        if (word.getName().toLowerCase().compareToIgnoreCase(root.getWord().getName().toLowerCase()) < 0) {
             root.setLeft(insertRec(word, root.getLeft()));
         }
         else if (word.getName().toLowerCase().compareTo(root.getWord().getName().toLowerCase()) > 0) {
