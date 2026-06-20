@@ -20,20 +20,17 @@ public class Dictionary {
         this.root = root;
     }
 
-    // PRE-ORDER
-    public void preOrder(Node root) {
-        if (root != null) {
-            System.out.println(root.getWord().getName());
-            preOrder(root.getLeft());
-            preOrder(root.getRight());
-        }
+    // Clear
+    public void clear() {
+        this.root = null;
     }
+
 
     // IN-ORDER
     public void inOrder(Node root) {
         if (root != null) {
             inOrder(root.getLeft());
-            System.out.println(root.getWord().getName());
+            System.out.println(root.getWord());
             inOrder(root.getRight());
         }
     }
@@ -42,24 +39,19 @@ public class Dictionary {
     public void reverseInOrder(Node root) {
         if (root != null) {
             reverseInOrder(root.getRight());
-            System.out.println(root.getWord().getName());
+            System.out.println(root.getWord());
             reverseInOrder(root.getLeft());
-        }
-    }
-
-    // POST-ORDER
-    public void postOrder(Node root) {
-        if (root != null) {
-            postOrder(root.getLeft());
-            postOrder(root.getRight());
-            System.out.println(root.getWord().getName());
         }
     }
 
     // SEARCH SUBSTRING WORD
     public List<Word> searchSubstringWord(String subString) {
         List<Word> resultList = new ArrayList<>();
-        searchSubstringWordRec(subString.toLowerCase(), this.root, resultList);
+        try {
+            searchSubstringWordRec(subString, this.root, resultList);
+        } catch (Exception e){
+            ExceptionHandler.handle(e);
+        }
         return resultList;
     }
     private void searchSubstringWordRec(String subString, Node root, List<Word> resutlList) {
@@ -67,8 +59,8 @@ public class Dictionary {
             return;
         }
 
-        String currentWordName = root.getWord().getName();
-        if (currentWordName.contains(subString)) {
+        String currentWordName = root.getWord().getName().toLowerCase();
+        if (currentWordName.contains(subString.toLowerCase())) {
             resutlList.add(root.getWord());
         }
 
@@ -78,19 +70,24 @@ public class Dictionary {
 
     // SEARCH WORD
     public Word searchWord(String keyWord) {
-        Node node = searchRec(keyWord.toLowerCase(), this.root);
-        return (node != null) ? node.getWord() : null;
+        try {
+            Node node = searchRec(keyWord, this.root);
+            return (node != null) ? node.getWord() : null;
+        } catch (Exception e){
+            ExceptionHandler.handle(e);
+            return null;
+        }
     }
     private Node searchRec(String keyWord, Node root) {
         if (root == null) {
             return null;
         }
 
-        if (keyWord.compareTo(root.getWord().getName()) == 0) {
+        if (keyWord.toLowerCase().compareTo(root.getWord().getName().toLowerCase()) == 0) {
             return root;
         }
 
-        if (keyWord.compareTo(root.getWord().getName()) < 0) {
+        if (keyWord.toLowerCase().compareTo(root.getWord().getName().toLowerCase()) < 0) {
             return searchRec(keyWord, root.getLeft());
         }
 
@@ -99,17 +96,23 @@ public class Dictionary {
 
     // INSERT WORD
     public void insertWord(Word word) {
-        this.root = insertRec(word, this.root);
+        try {
+            this.root = insertRec(word, this.root);
+        } catch (Exception e) {
+            ExceptionHandler.handle(e);
+        }
+
     }
     private Node insertRec(Word word, Node root) {
         if (root == null) {
+            word.setName(word.getName().toLowerCase());
             return new Node(word);
         }
 
-        if (word.getName().compareTo(root.getWord().getName()) < 0) {
+        if (word.getName().toLowerCase().compareTo(root.getWord().getName().toLowerCase()) < 0) {
             root.setLeft(insertRec(word, root.getLeft()));
         }
-        else if (word.getName().compareTo(root.getWord().getName()) > 0) {
+        else if (word.getName().toLowerCase().compareTo(root.getWord().getName().toLowerCase()) > 0) {
             root.setRight(insertRec(word, root.getRight()));
         }
 
