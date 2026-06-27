@@ -85,7 +85,7 @@ public class Main {
 
                     // Sau khi nhập xong hết các nghĩa, tiến hành tạo Word và chèn vào từ điển
                     Word wordInsert = new Word(targetWord, listTypes);
-                    dictionary.insertWord(wordInsert);
+                    dictionary.addWord(wordInsert);
                     System.out.println("\n=> Đã thêm từ \"" + targetWord + " vào từ điển");
                     break;
 

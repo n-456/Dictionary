@@ -30,7 +30,7 @@ public class WordGAO implements WordRepository {
                 Word word = gson.fromJson(reader, Word.class);
 
                 // Add word to dictionary
-                dictionary.insertWord(word);
+                dictionary.addWord(word);
             }
 
             // read "]"

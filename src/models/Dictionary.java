@@ -50,25 +50,31 @@ public class Dictionary {
         }
     }
 
-    // SEARCH SUBSTRING WORD
+    /**
+     * Tìm word bằng substring
+     */
     public List<Word> searchSubstringWord(String subString) {
-        List<Word> resultList = new ArrayList<>();
-        if (subString == null)
+        if (subString == null || subString.trim().isEmpty()) {
             return null;
-        searchSubstringWordRec(subString, this.root, resultList);
+        }
+        List<Word> resultList = new ArrayList<>();
+        searchSubstringWordRec(subString.trim().toLowerCase(), this.root, resultList);
         return resultList;
     }
+
     private void searchSubstringWordRec(String subString, Node root, List<Word> resutlList) {
         if (root == null) {
             return;
         }
 
-        String currentWordName = root.getWord().getName().toLowerCase();
-        if (currentWordName.contains(subString.toLowerCase())) {
-            resutlList.add(root.getWord());
+        searchSubstringWordRec(subString, root.getLeft(), resutlList);
+
+        if (root.getWord() != null && root.getWord().getKeyOfWord() != null) {
+            if (root.getWord().getKeyOfWord().contains(subString.toLowerCase())) {
+                resutlList.add(root.getWord());
+            }
         }
 
-        searchSubstringWordRec(subString, root.getLeft(), resutlList);
         searchSubstringWordRec(subString, root.getRight(), resutlList);
     }
 
@@ -84,11 +90,11 @@ public class Dictionary {
             return null;
         }
 
-        if (keyWord.compareToIgnoreCase(root.getWord().getName()) == 0) {
+        if (keyWord.compareToIgnoreCase(root.getWord().getKeyOfWord()) == 0) {
             return root;
         }
 
-        if (keyWord.compareTo(root.getWord().getName().toLowerCase()) < 0) {
+        if (keyWord.compareTo(root.getWord().getKeyOfWord().toLowerCase()) < 0) {
             return searchRec(keyWord, root.getLeft());
         }
 
@@ -96,22 +102,22 @@ public class Dictionary {
     }
 
     // INSERT WORD
-    public void insertWord(Word word) {
+    public void addWord(Word word) {
         if (word == null)
             return;
-        this.root = insertRec(word, this.root);
+        this.root = addRec(word, this.root);
     }
-    private Node insertRec(Word word, Node root) {
+    private Node addRec(Word word, Node root) {
         if (root == null) {
-            word.setName(word.getName().toLowerCase());
+            word.setKeyOfWord(word.getKeyOfWord().toLowerCase());
             return new Node(word);
         }
 
-        if (word.getName().toLowerCase().compareToIgnoreCase(root.getWord().getName().toLowerCase()) < 0) {
-            root.setLeft(insertRec(word, root.getLeft()));
+        if (word.getKeyOfWord().toLowerCase().compareToIgnoreCase(root.getWord().getKeyOfWord().toLowerCase()) < 0) {
+            root.setLeft(addRec(word, root.getLeft()));
         }
-        else if (word.getName().toLowerCase().compareTo(root.getWord().getName().toLowerCase()) > 0) {
-            root.setRight(insertRec(word, root.getRight()));
+        else if (word.getKeyOfWord().toLowerCase().compareTo(root.getWord().getKeyOfWord().toLowerCase()) > 0) {
+            root.setRight(addRec(word, root.getRight()));
         }
 
         return root;
