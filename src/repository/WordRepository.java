@@ -1,6 +1,5 @@
 package repository;
 
-import models.Node;
 import models.Dictionary;
 
 public interface WordRepository {
