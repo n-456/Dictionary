@@ -1,8 +1,10 @@
 package repository;
 
-import models.Node;
 import models.Dictionary;
+import models.Word;
+
+import java.util.List;
 
 public interface WordRepository {
-    public void loadFromFile(Dictionary dictionary);
+    public List<Word> loadAllWords();
 }
