@@ -5,11 +5,13 @@ import java.util.List;
 
 public class Dictionary {
     private Node root;
+    private int count;
 
     // Constructor
     public Dictionary(){}
     public Dictionary(Node root) {
         this.root = root;
+        this.count = 0;
     }
 
     // Getter, setter
@@ -18,6 +20,12 @@ public class Dictionary {
     }
     private void setRoot(Node root) {
         this.root = root;
+    }
+    public int getCount() {
+        return count;
+    }
+    public void setCount(int count) {
+        this.count = count;
     }
 
     /**
@@ -124,22 +132,37 @@ public class Dictionary {
     }
 
 
-    // INSERT WORD
-    public void addWord(Word word) {
-        if (word == null)
-            return;
+    /**
+     * Thêm word
+     */
+    public boolean addWord(Word word) {
+        if (word == null || word.getKeyOfWord() == null || word.getKeyOfWord().trim().isEmpty()) {
+            return false;
+        }
+        int countBeforeAdd = this.count;
         this.root = addRec(word, this.root);
+        return (countBeforeAdd != this.count);
     }
+
     private Node addRec(Word word, Node root) {
         if (root == null) {
-            word.setKeyOfWord(word.getKeyOfWord().toLowerCase());
+            this.count ++;
             return new Node(word);
         }
 
-        if (word.getKeyOfWord().toLowerCase().compareToIgnoreCase(root.getWord().getKeyOfWord().toLowerCase()) < 0) {
-            root.setLeft(addRec(word, root.getLeft()));
+        if (root.getWord() == null || root.getWord().getKeyOfWord() == null) {
+            root.setWord(word);
+            this.count++;
+            return root;
         }
-        else if (word.getKeyOfWord().toLowerCase().compareTo(root.getWord().getKeyOfWord().toLowerCase()) > 0) {
+
+        String keyWordLower = word.getKeyOfWord().toLowerCase();
+        String rootWordLower = root.getWord().getKeyOfWord().toLowerCase();
+
+        int cmp = keyWordLower.compareTo(rootWordLower);
+        if (cmp < 0) {
+            root.setLeft(addRec(word, root.getLeft()));
+        } else if (cmp > 0) {
             root.setRight(addRec(word, root.getRight()));
         }
 

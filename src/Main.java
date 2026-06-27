@@ -91,8 +91,11 @@ public class Main {
 
                     // Sau khi nhập xong hết các nghĩa, tiến hành tạo Word và chèn vào từ điển
                     Word wordInsert = new Word(targetWord, listTypes);
-                    dictionary.addWord(wordInsert);
-                    System.out.println("\n=> Đã thêm từ \"" + targetWord + " vào từ điển");
+                    if (dictionary.addWord(wordInsert)) {
+                        System.out.println("\n=> Đã thêm từ \"" + targetWord + " vào từ điển");
+                    } else {
+                        System.out.println("\n=> Từ \"" + targetWord + " đã có trong từ điển");
+                    }
                     break;
 
                 case 4:
