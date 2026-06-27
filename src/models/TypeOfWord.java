@@ -2,14 +2,14 @@ package models;
 
 public class TypeOfWord {
     private String meaning;
-    private String type;
+    private String partOfSpeech;
     private String example;
 
 
     // Constructor
-    public TypeOfWord (String meaning, String type, String example) {
+    public TypeOfWord (String meaning, String partOfSpeech, String example) {
         this.meaning = meaning;
-        this.type = type;
+        this.partOfSpeech = partOfSpeech;
         this.example = example;
     }
 
@@ -23,12 +23,12 @@ public class TypeOfWord {
         this.meaning = meaning;
     }
 
-    public String getType() {
-        return (type != null) ? type : "";
+    public String getPartOfSpeech() {
+        return (partOfSpeech != null) ? partOfSpeech : "";
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPartOfSpeech(String partOfSpeech) {
+        this.partOfSpeech = partOfSpeech;
     }
 
     public String getExample() {
@@ -42,7 +42,7 @@ public class TypeOfWord {
 
     @Override
     public String toString() {
-        return "\n(" + type + ") " +
+        return "\n(" + partOfSpeech + ") " +
                 meaning +
                 ". EX: " + example + "\n";
     }

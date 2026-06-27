@@ -1,101 +1,101 @@
 [
   {
-    "name": "set of china",
+    "keyOfWord": "set of china",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "bộ gốm sứ",
         "example": "My grandmother gave me a beautiful set of china."
       }
     ]
   },
   {
-    "name": "rare breeds section",
+    "keyOfWord": "rare breeds section",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "khu giống hiếm",
         "example": "Visitors can see unusual animals in the rare breeds section."
       }
     ]
   },
   {
-    "name": "grazing area",
+    "keyOfWord": "grazing area",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "khu chăn thả",
         "example": "The cows are feeding in the grazing area."
       }
     ]
   },
   {
-    "name": "experimental crops area",
+    "keyOfWord": "experimental crops area",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "khu trồng trọt thí nghiệm",
         "example": "Scientists are testing new seeds in the experimental crops area."
       }
     ]
   },
   {
-    "name": "marsh",
+    "keyOfWord": "marsh",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "đầm lầy",
         "example": "Many birds live in the marsh near the lake."
       }
     ]
   },
   {
-    "name": "temporarily out of bound to the public",
+    "keyOfWord": "temporarily out of bound to the public",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "đóng cửa tạm thời đối với công chúng",
         "example": "The park is temporarily out of bound to the public for maintenance."
       }
     ]
   },
   {
-    "name": "large signs",
+    "keyOfWord": "large signs",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "các biển báo lớn",
         "example": "Large signs show the way to the exit."
       }
     ]
   },
   {
-    "name": "breed",
+    "keyOfWord": "breed",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "giống loài động vật",
         "example": "This breed of dog is known for its intelligence."
       }
     ]
   },
   {
-    "name": "quarantine service",
+    "keyOfWord": "quarantine service",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "dịch vụ kiểm dịch hàng hóa",
         "example": "All imported animals must go through the quarantine service."
       }
     ]
   },
   {
-    "name": "infested with mites",
+    "keyOfWord": "infested with mites",
     "typeOfWord": [
       {
         "typeOfWord": [
           {
-            "type": "Noun",
+            "partOfSpeech": "Noun",
             "meaning": "bị nhiễm bọ, ve chó",
             "example": "The old blanket was infested with mites."
           }
@@ -104,160 +104,160 @@
     ]
   },
   {
-    "name": "microscopic creature",
+    "keyOfWord": "microscopic creature",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "sinh vật cực nhỏ, kích thước hiển vi",
         "example": "A drop of water can contain many microscopic creatures."
       }
     ]
   },
   {
-    "name": "eradicated",
+    "keyOfWord": "eradicated",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "loại bỏ",
         "example": "The disease was successfully eradicated in 2010."
       }
     ]
   },
   {
-    "name": "unemployed",
+    "keyOfWord": "unemployed",
     "typeOfWord": [
       {
-        "type": "Adjective",
+        "partOfSpeech": "Adjective",
         "meaning": "thất nghiệp",
         "example": "He has been unemployed for six months."
       }
     ]
   },
   {
-    "name": "aim",
+    "keyOfWord": "aim",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "mục tiêu",
         "example": "Her main aim is to become a doctor."
       }
     ]
   },
   {
-    "name": "reform",
+    "keyOfWord": "reform",
     "typeOfWord": [
       {
-        "type": "Pronoun",
+        "partOfSpeech": "Pronoun",
         "meaning": "cải tổ",
         "example": "The government introduced a new education reform."
       }
     ]
   },
   {
-    "name": "misrepresented",
+    "keyOfWord": "misrepresented",
     "typeOfWord": [
       {
-        "type": "Verb",
+        "partOfSpeech": "Verb",
         "meaning": "trình bày sai, làm hiểu sai",
         "example": "The article misrepresented what the scientist said."
       }
     ]
   },
   {
-    "name": "press",
+    "keyOfWord": "press",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "báo chí",
         "example": "The press reported the story widely."
       }
     ]
   },
   {
-    "name": "preferences",
+    "keyOfWord": "preferences",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "những sự ưa thích",
         "example": "People have different preferences in music."
       }
     ]
   },
   {
-    "name": "rationale",
+    "keyOfWord": "rationale",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "lý do, cơ sở luận, căn cứ hợp lý",
         "example": "The rationale for the project is clearly explained."
       }
     ]
   },
   {
-    "name": "collating",
+    "keyOfWord": "collating",
     "typeOfWord": [
       {
-        "type": "Verb",
+        "partOfSpeech": "Verb",
         "meaning": "đối chiếu sắp xếp dữ liệu",
         "example": "The team must collate all the raw data from the experiments"
       }
     ]
   },
   {
-    "name": "tutor",
+    "keyOfWord": "tutor",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "gia sư",
         "example": "a tutor in a university"
       }
     ]
   },
   {
-    "name": "pull out",
+    "keyOfWord": "pull out",
     "typeOfWord": [
       {
-        "type": "Verb",
+        "partOfSpeech": "Verb",
         "meaning": "rút khỏi, rút lui khỏi",
         "example": "people decided to pull out when it came to a second round"
       }
     ]
   },
   {
-    "name": "undergraduate",
+    "keyOfWord": "undergraduate",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "Sinh viên đại học chưa tốt nghiệp",
         "example": "Most of undergraduates live in dormitories"
       }
     ]
   },
   {
-    "name": "reassurance",
+    "keyOfWord": "reassurance",
     "typeOfWord": [
       {
-        "type": "Noun",
+        "partOfSpeech": "Noun",
         "meaning": "Sự cam đoan, đảm bảo",
         "example": "they wanted reassurance that..."
       }
     ]
   },
   {
-    "name": "traceable",
+    "keyOfWord": "traceable",
     "typeOfWord": [
       {
-        "type": "Adjective",
+        "partOfSpeech": "Adjective",
         "meaning": "Có thể truy vết được",
         "example": "All organic produce must be fully traceable from farm to shelf."
       }
     ]
   },
   {
-    "name": "bizarre",
+    "keyOfWord": "bizarre",
     "typeOfWord": [
       {
-        "type": "Adjective",
+        "partOfSpeech": "Adjective",
         "meaning": "Sự kỳ quái",
         "example": "That party was too bizarre for me!"
       }
