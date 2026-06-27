@@ -1,3 +1,5 @@
+import exception.DatabaseException;
+import exception.ExceptionHandler;
 import models.Dictionary;
 import models.TypeOfWord;
 import models.Word;
@@ -21,9 +23,10 @@ public class Main {
                 dictionary.addWord(word);
             }
             System.out.println("Tải thành công!\n");
-        } catch (Exception e) {
-            System.err.println("Lỗi nghiêm trọng: Không thể đọc file dữ liệu từ điển!");
-            e.printStackTrace();
+        } catch (DatabaseException e) {
+            ExceptionHandler.log(e);
+            System.err.println("Lỗi khởi chạy: " + e.getMessage());
+            System.err.println("Ứng dụng sẽ hoạt động không có dữ liệu ban đầu.");
         }
 
         Scanner scanner = new Scanner(System.in);

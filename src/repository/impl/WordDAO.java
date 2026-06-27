@@ -1,5 +1,6 @@
 package repository.impl;
 
+import exception.DatabaseException;
 import models.Word;
 import repository.WordRepository;
 
@@ -42,7 +43,7 @@ public class WordDAO implements WordRepository {
                 return words != null ? words : new ArrayList<>();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseException("Hệ thống từ chối quyền truy cập hoặc lỗi đọc file!", e);
         }
     }
 }
