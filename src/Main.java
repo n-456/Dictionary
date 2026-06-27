@@ -1,7 +1,8 @@
 import models.Dictionary;
 import models.TypeOfWord;
 import models.Word;
-import repository.impl.WordGAO;
+import repository.WordRepository;
+import repository.impl.WordDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +11,22 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Dictionary dictionary = new Dictionary();
-        WordGAO wordGAO = new WordGAO("resource/dictionary.json");
-        Scanner scanner = new Scanner(System.in);
+        // Áp dụng DIP: Khai báo qua Interface WordRepository
+        WordRepository wordRepository = new WordDAO("resource/dictionary.json");
 
-        // Tự động load dữ liệu từ file khi khởi động
         System.out.println("--- ĐANG TẢI DỮ LIỆU TỪ FILE ---");
-        wordGAO.loadFromFile(dictionary);
-        System.out.println("Tải thành công!\n");
+        try {
+            List<Word> words = wordRepository.loadAllWords();
+            for (Word word : words) {
+                dictionary.addWord(word);
+            }
+            System.out.println("Tải thành công!\n");
+        } catch (Exception e) {
+            System.err.println("Lỗi nghiêm trọng: Không thể đọc file dữ liệu từ điển!");
+            e.printStackTrace();
+        }
+
+        Scanner scanner = new Scanner(System.in);
 
         int choice;
         do {
