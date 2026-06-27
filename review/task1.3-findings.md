@@ -4,64 +4,70 @@ Báo cáo này đánh giá chất lượng mã nguồn hiện tại trên nhánh
 
 ---
 
-## 📌 Tóm Tắt Tổng Quan
+## 📌 Tóm Tắt Tổng Quan & Trạng Thái
 
-| Mức Độ Nghiêm Trọng (Severity) | Số Lượng | Mô Tả |
-| :--- | :---: | :--- |
-| 🔴 **High (Nghiêm trọng)** | 2 | Lỗi biên dịch (cú pháp) và lỗi logic cốt lõi ảnh hưởng trực tiếp đến hoạt động của ứng dụng. |
-| 🟡 **Medium (Trung bình)** | 5 | Vi phạm các nguyên lý SOLID (SRP, OCP, LSP, ISP, DIP) gây khó khăn cho việc mở rộng, bảo trì hoặc viết Unit Test. |
-| 🟢 **Low (Thấp)** | 2 | Các điểm chưa nhất quán trong code, nguy cơ tiềm ẩn nhỏ hoặc quy chuẩn đặt tên. |
+| ID | Vấn đề | Vị trí ảnh hưởng | Mức độ (Severity) | Trạng thái |
+| :--- | :--- | :--- | :--- | :--- |
+| **1.1** | Lỗi cú pháp gây lỗi biên dịch trong `WordGAO.java` | [WordGAO.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/repository/impl/WordGAO.java) | 🔴 **High** |  **Đã giải quyết** (Xóa code thừa, sửa thành `WordDAO.java`) |
+| **1.2** | Lỗi logic tìm kiếm phân biệt chữ hoa/chữ thường | [Dictionary.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Dictionary.java) | 🔴 **High** |  **Đã giải quyết** (Chuẩn hóa chữ thường khi so sánh) |
+| **2.1** | Vi phạm nguyên lý Đơn Nhiệm (SRP) | Toàn bộ Project | 🟡 **Medium** | ⏳ **Đã giải quyết một phần** (Tách UI khỏi `Dictionary`, Repository không chèn trực tiếp) |
+| **2.2** | Vi phạm nguyên lý Đóng/Mở (OCP) | `ExceptionHandler.java`, `Dictionary.java` | 🟡 **Medium** | ❌ **Chưa giải quyết** (Vẫn kiểm tra tĩnh và BST fix cứng comparator) |
+| **2.3** | Vi phạm nguyên lý Thay Thế Liskov (LSP) | `WordGAO.java` (nay là `WordDAO.java`) | 🟡 **Medium** |  **Đã giải quyết** (Ném lỗi lên Main thay vì tự nuốt) |
+| **2.4** | Vi phạm nguyên lý Phân Tách Giao Diện (ISP) | `WordRepository.java` | 🟡 **Medium** |  **Đã giải quyết** (Repository không nhận tham số `Dictionary`) |
+| **2.5** | Vi phạm nguyên lý Đảo Ngược Phụ Thuộc (DIP) | `Main.java`, `WordRepository.java` | 🟡 **Medium** |  **Đã giải quyết** (Khai báo và liên kết qua interface) |
+| **3.1** | Rủi ro NullPointerException (NPE) | `Word.java`, `Dictionary.java` | 🟢 **Low** |  **Đã giải quyết** (Thêm kiểm tra an toàn tại Dictionary) |
+| **3.2** | Đặt tên lớp và thuộc tính chưa chuẩn | `WordGAO.java` (nay là `WordDAO.java`), `Word.java` | 🟢 **Low** |  **Đã giải quyết** (Đổi tên lớp thành `WordDAO` và trường thành `keyOfWord`) |
 
 ---
 
 ## 🔴 1. Các Vấn Đề Nghiêm Trọng (Severity: High)
 
-### 1.1. Lỗi cú pháp gây lỗi biên dịch (Compilation Error) trong `WordGAO.java`
-* **Vị trí:** [WordGAO.java:L66-73](file:///d:/Students%20Reports/Ngoc/Dictionary/src/repository/impl/WordGAO.java#L66-L73)
-* **Chi tiết:** File chứa các ký tự đóng ngoặc nhọn `}` thừa và một khối `catch` lạc loài nằm ngoài phạm vi bất kỳ phương thức nào ở cuối file.
-* **Ảnh hưởng:** Ứng dụng không chạy được.
+### 1.1. [Đã giải quyết] Lỗi cú pháp gây lỗi biên dịch (Compilation Error) trong `WordGAO.java`
+* **Vị trí:** [WordDAO.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/repository/impl/WordDAO.java) (đã sửa đổi và đổi tên từ `WordGAO.java`)
+* **Chi tiết:** File chứa các ký tự đóng ngoặc nhọn `}` thừa và một khối `catch` lạc loài đã được dọn dẹp triệt để.
+* **Trạng thái:**  **Đã giải quyết** (Mã nguồn build thành công).
 
-### 1.2. Lỗi logic tìm kiếm phân biệt chữ hoa/chữ thường trong `Dictionary.searchRec`
-* **Vị trí:** [Dictionary.java:L87-95](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Dictionary.java#L87-L95)
-* **Chi tiết:** Trong phương thức đệ quy tìm kiếm nút cây BST, việc so sánh phân biệt chữ hoa/thường khi định hướng đi trái/phải (`keyWord.compareTo(root.getWord().getName().toLowerCase()) < 0`) làm sai lệch hướng tìm kiếm khi từ khóa có ký tự viết hoa (ví dụ: `Banana` đi sang trái thay vì phải do so sánh mã ASCII của `B` và `a`).
-* **Ảnh hưởng:** Tìm kiếm từ khóa có chữ viết hoa sẽ báo không tìm thấy từ dù từ đó có tồn tại.
+### 1.2. [Đã giải quyết] Lỗi logic tìm kiếm phân biệt chữ hoa/chữ thường trong `Dictionary.searchRec`
+* **Vị trí:** [Dictionary.java:L119-132](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Dictionary.java#L119-L132)
+* **Chi tiết:** Trong phương thức đệ quy tìm kiếm nút cây BST, việc so sánh đã được đồng bộ hóa đưa về chữ thường (`keyWordLower.compareTo(rootWordLower)`) trước khi phân hướng đi trái/phải.
+* **Trạng thái:**  **Đã giải quyết** (Đã test tìm kiếm chính xác không phân biệt chữ hoa/thường).
 
 ---
 
 ## 🟡 2. Vi Phạm Nguyên Lý SOLID (Severity: Medium)
 
-### 2.1. Vi phạm nguyên lý Đơn Nhiệm (SRP - Single Responsibility Principle)
-1. **[Dictionary.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Dictionary.java):**
-   - Đảm nhận in kết quả ra màn hình console bằng `System.out.println` trong các hàm duyệt cây `printInOrder()` và `printReverseInOrder()`.
-2. **[WordGAO.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/repository/impl/WordGAO.java):**
-   - Tự cấu hình cấu trúc Gson và trực tiếp chèn dữ liệu vào `Dictionary` thông qua `dictionary.insertWord(word)` thay vì chỉ trả về một danh sách các từ.
-3. **[ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java):**
-   - Vừa phân loại ngoại lệ vừa đảm nhận xuất thông tin ra Console.
+### 2.1. [Đã giải quyết một phần] Vi phạm nguyên lý Đơn Nhiệm (SRP - Single Responsibility Principle)
+1. **[Dictionary.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Dictionary.java) [ĐÃ GIẢI QUYẾT]:**
+   - Đã tách Console UI ra khỏi class. Thay vì tự in console bằng `System.out.println`, class cung cấp `getInOrderWords()` và `getReverseInOrderWords()` trả về `List<Word>` để caller tự xử lý phần hiển thị.
+2. **[WordDAO.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/repository/impl/WordDAO.java) [ĐÃ GIẢI QUYẾT]:**
+   - Chỉ đảm nhận đọc file JSON và trả về `List<Word>`, không còn trực tiếp chèn dữ liệu vào `Dictionary`.
+3. **[ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java) [CHƯA GIẢI QUYẾT]:**
+   - Vẫn thực hiện vừa kiểm tra loại ngoại lệ vừa trực tiếp xuất log lỗi ra console.
 
-### 2.2. Vi phạm nguyên lý Đóng/Mở (OCP - Open/Closed Principle)
-1. **[ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java):**
+### 2.2. [Chưa giải quyết] Vi phạm nguyên lý Đóng/Mở (OCP - Open/Closed Principle)
+1. **[ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java) [CHƯA GIẢI QUYẾT]:**
    - Hàm `handle(Exception e)` dùng `instanceof` kiểm tra tĩnh. Thêm ngoại lệ mới phải sửa mã nguồn của lớp này.
-2. **[Dictionary.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Dictionary.java):**
+2. **[Dictionary.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Dictionary.java) [CHƯA GIẢI QUYẾT]:**
    - Thuật toán so sánh của BST bị fix cứng trong code, không cho phép tùy biến bộ so sánh (`Comparator`).
 
-### 2.3. Vi phạm nguyên lý Thay Thế Liskov (LSP - Liskov Substitution Principle)
-* **Chi tiết:** Khi xảy ra lỗi đọc file (`IOException`), `WordGAO` bắt ngoại lệ và lẳng lặng in stack trace. Lớp gọi ở `Main.java` vẫn báo `"Tải thành công!"` dù thực tế từ điển trống rỗng.
+### 2.3. [Đã giải quyết] Vi phạm nguyên lý Thay Thế Liskov (LSP - Liskov Substitution Principle)
+* **Chi tiết:** Khi xảy ra lỗi đọc file, `WordDAO` ném ngoại lệ lên `Main.java` thay vì nuốt lỗi. `Main.java` có khối `try-catch` đón nhận và thông báo đúng sự cố tới người dùng, không bị hiện tượng báo thành công ảo.
 
-### 2.4. Vi phạm nguyên lý Phân Tách Giao Diện (ISP - Interface Segregation Principle)
-* **Chi tiết:** Interface `WordRepository` nhận trực tiếp lớp cụ thể `Dictionary` làm tham số trong phương thức `loadFromFile(Dictionary dictionary)`, gây ra liên kết chặt chẽ không đáng có.
+### 2.4. [Đã giải quyết] Vi phạm nguyên lý Phân Tách Giao Diện (ISP - Interface Segregation Principle)
+* **Chi tiết:** Interface `WordRepository` được thiết kế lại chỉ trả về `List<Word>`, loại bỏ hoàn toàn việc phụ thuộc trực tiếp vào tham số `Dictionary`.
 
-### 2.5. Vi phạm nguyên lý Đảo Ngược Phụ Thuộc (DIP - Dependency Inversion Principle)
-* **Chi tiết:** `Main.java` phụ thuộc trực tiếp vào lớp cụ thể `WordGAO`. Interface `WordRepository` phụ thuộc trực tiếp vào lớp cụ thể `Dictionary`.
+### 2.5. [Đã giải quyết] Vi phạm nguyên lý Đảo Ngược Phụ Thuộc (DIP - Dependency Inversion Principle)
+* **Chi tiết:** `Main.java` được cấu trúc để tương tác thông qua lớp trừu tượng/Interface `WordRepository` thay vì liên kết trực tiếp với lớp thực thi cụ thể `WordDAO`.
 
 ---
 
 ## 🟢 3. Các Điểm Chưa Nhất Quán & Khuyến Nghị Khác (Severity: Low)
 
-### 3.1. Rủi ro NullPointerException (NPE)
-* Constructor của `Word` gọi `name.toLowerCase()` mà không kiểm tra null, trong khi `getName()` lại kiểm tra null. `searchSubstringWordRec` cũng tiềm ẩn nguy cơ NPE nếu `name` của Word trong cây bị null.
+### 3.1. [Đã giải quyết] Rủi ro NullPointerException (NPE)
+* **Chi tiết:** Các hàm thêm và duyệt cây trong [Dictionary.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Dictionary.java) đã được bổ sung kiểm tra null chủ động trước khi gọi getter.
 
-### 3.2. Đặt tên lớp chưa chuẩn
-* Đổi tên `WordGAO` thành `WordDAO` hoặc `JsonWordRepository`.
+### 3.2. [Đã giải quyết] Đặt tên lớp chưa chuẩn và thuộc tính chưa chuẩn
+* **Chi tiết:** Đã đổi tên lớp `WordGAO` thành `WordDAO`. Tên thuộc tính trong [Word.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/models/Word.java) đã đổi từ `name` thành `keyOfWord`.
 
 ---
 
