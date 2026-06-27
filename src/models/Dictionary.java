@@ -5,11 +5,13 @@ import java.util.List;
 
 public class Dictionary {
     private Node root;
+    private int count;
 
     // Constructor
     public Dictionary(){}
     public Dictionary(Node root) {
         this.root = root;
+        this.count = 0;
     }
 
     // Getter, setter
@@ -19,99 +21,149 @@ public class Dictionary {
     private void setRoot(Node root) {
         this.root = root;
     }
-
-    // Clear
-    public void clear() {
-        this.root = null;
+    public int getCount() {
+        return count;
+    }
+    public void setCount(int count) {
+        this.count = count;
     }
 
-
-    // IN-ORDER
-    public void printInOrder() {
-        inOrder(getRoot());
+    /**
+     * Lấy danh sách word theo thứ tự A - Z
+     */
+    public List<Word> getInOrderWords() {
+        List<Word> list = new ArrayList<>();
+        collectInOrder(this.root, list);
+        return list;
     }
-    private void inOrder(Node root) {
-        if (root != null) {
-            inOrder(root.getLeft());
-            System.out.println(root.getWord());
-            inOrder(root.getRight());
+
+    private void collectInOrder(Node root, List<Word> list) {
+        if (root == null) {
+            return;
         }
-    }
 
-    // REVERSE IN-ORDER
-    public void printReverseInOrder() {
-        reverseInOrder(getRoot());
-    }
-    private void reverseInOrder(Node root) {
-        if (root != null) {
-            reverseInOrder(root.getRight());
-            System.out.println(root.getWord());
-            reverseInOrder(root.getLeft());
+        collectInOrder(root.getLeft(), list);
+        if (root.getWord() != null) {
+            list.add(root.getWord());
         }
+        collectInOrder(root.getRight(), list);
     }
 
-    // SEARCH SUBSTRING WORD
+
+    /**
+     * Lấy danh sách word theo thứ tự Z - A
+     */
+    public List<Word> getReverseInOrderWords() {
+        List<Word> list = new ArrayList<>();
+        collectReverseInOrder(this.root, list);
+        return list;
+    }
+
+    private void collectReverseInOrder(Node root, List<Word> list) {
+        if (root == null) {
+            return;
+        }
+
+        collectReverseInOrder(root.getRight(), list);
+        if (root.getWord() != null) {
+            list.add(root.getWord());
+        }
+        collectReverseInOrder(root.getLeft(), list);
+    }
+
+
+    /**
+     * Tìm word bằng substring
+     */
     public List<Word> searchSubstringWord(String subString) {
-        List<Word> resultList = new ArrayList<>();
-        if (subString == null)
+        if (subString == null || subString.trim().isEmpty()) {
             return null;
-        searchSubstringWordRec(subString, this.root, resultList);
+        }
+        List<Word> resultList = new ArrayList<>();
+        searchSubstringWordRec(subString.trim().toLowerCase(), this.root, resultList);
         return resultList;
     }
+
     private void searchSubstringWordRec(String subString, Node root, List<Word> resutlList) {
         if (root == null) {
             return;
         }
 
-        String currentWordName = root.getWord().getName().toLowerCase();
-        if (currentWordName.contains(subString.toLowerCase())) {
-            resutlList.add(root.getWord());
+        searchSubstringWordRec(subString, root.getLeft(), resutlList);
+
+        if (root.getWord() != null && root.getWord().getKeyOfWord() != null) {
+            if (root.getWord().getKeyOfWord().contains(subString.toLowerCase())) {
+                resutlList.add(root.getWord());
+            }
         }
 
-        searchSubstringWordRec(subString, root.getLeft(), resutlList);
         searchSubstringWordRec(subString, root.getRight(), resutlList);
     }
 
-    // SEARCH WORD
-    public Word searchWord(String keyWord) {
-        if (keyWord == null)
+    /**
+     * Tìm word
+     */
+    public Word searchWord(String keyOfWord) {
+        if (keyOfWord == null || keyOfWord.trim().isEmpty()) {
             return null;
-        Node node = searchRec(keyWord, this.root);
+        }
+        Node node = searchRec(keyOfWord.trim(), this.root);
         return (node != null) ? node.getWord() : null;
     }
-    private Node searchRec(String keyWord, Node root) {
+
+    private Node searchRec(String keyOfWord, Node root) {
         if (root == null) {
             return null;
         }
 
-        if (keyWord.compareToIgnoreCase(root.getWord().getName()) == 0) {
+        String keyWordLower = keyOfWord.toLowerCase();
+        String rootWordLower = root.getWord().getKeyOfWord().toLowerCase();
+
+        int cmp = keyWordLower.compareTo(rootWordLower);
+        if (cmp == 0) {
             return root;
         }
 
-        if (keyWord.compareTo(root.getWord().getName().toLowerCase()) < 0) {
-            return searchRec(keyWord, root.getLeft());
+        if (cmp < 0) {
+            return searchRec(keyOfWord, root.getLeft());
         }
 
-        return searchRec(keyWord, root.getRight());
+        return searchRec(keyOfWord, root.getRight());
     }
 
-    // INSERT WORD
-    public void insertWord(Word word) {
-        if (word == null)
-            return;
-        this.root = insertRec(word, this.root);
+
+    /**
+     * Thêm word
+     */
+    public boolean addWord(Word word) {
+        if (word == null || word.getKeyOfWord() == null || word.getKeyOfWord().trim().isEmpty()) {
+            return false;
+        }
+        int countBeforeAdd = this.count;
+        this.root = addRec(word, this.root);
+        return (countBeforeAdd != this.count);
     }
-    private Node insertRec(Word word, Node root) {
+
+    private Node addRec(Word word, Node root) {
         if (root == null) {
-            word.setName(word.getName().toLowerCase());
+            this.count ++;
             return new Node(word);
         }
 
-        if (word.getName().toLowerCase().compareToIgnoreCase(root.getWord().getName().toLowerCase()) < 0) {
-            root.setLeft(insertRec(word, root.getLeft()));
+        if (root.getWord() == null || root.getWord().getKeyOfWord() == null) {
+            root.setWord(word);
+            this.count++;
+            return root;
         }
-        else if (word.getName().toLowerCase().compareTo(root.getWord().getName().toLowerCase()) > 0) {
-            root.setRight(insertRec(word, root.getRight()));
+
+        String keyWordLower = word.getKeyOfWord().toLowerCase();
+        String rootWordLower = root.getWord().getKeyOfWord().toLowerCase();
+
+        int cmp = keyWordLower.compareTo(rootWordLower);
+        if (cmp < 0) {
+            root.setLeft(addRec(word, root.getLeft()));
+        } else if (cmp > 0) {
+            root.setRight(addRec(word, root.getRight()));
         }
 
         return root;

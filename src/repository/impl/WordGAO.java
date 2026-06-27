@@ -11,18 +11,13 @@ import repository.WordRepository;
 
 
 public class WordGAO implements WordRepository {
-    private String filePath;
-//    private final String FILE_JSON_PATH = "resource/dictionary.json";
-
-    public WordGAO(String filePath) {
-        this.filePath = filePath;
-    }
+    private final String FILE_JSON_PATH = "resource/dictionary.json";
 
     @Override
     public void loadFromFile(Dictionary dictionary) {
         Gson gson = new Gson();
 
-        try (JsonReader reader = new JsonReader(new FileReader(filePath))) {
+        try (JsonReader reader = new JsonReader(new FileReader(FILE_JSON_PATH))) {
             // read "["
             reader.beginArray();
 
