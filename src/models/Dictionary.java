@@ -20,35 +20,49 @@ public class Dictionary {
         this.root = root;
     }
 
-    // Clear
-    public void clear() {
-        this.root = null;
+    /**
+     * Lấy danh sách word theo thứ tự A - Z
+     */
+    public List<Word> getInOrderWords() {
+        List<Word> list = new ArrayList<>();
+        collectInOrder(this.root, list);
+        return list;
     }
 
-
-    // IN-ORDER
-    public void printInOrder() {
-        inOrder(getRoot());
-    }
-    private void inOrder(Node root) {
-        if (root != null) {
-            inOrder(root.getLeft());
-            System.out.println(root.getWord());
-            inOrder(root.getRight());
+    private void collectInOrder(Node root, List<Word> list) {
+        if (root == null) {
+            return;
         }
+
+        collectInOrder(root.getLeft(), list);
+        if (root.getWord() != null) {
+            list.add(root.getWord());
+        }
+        collectInOrder(root.getRight(), list);
     }
 
-    // REVERSE IN-ORDER
-    public void printReverseInOrder() {
-        reverseInOrder(getRoot());
+
+    /**
+     * Lấy danh sách word theo thứ tự Z - A
+     */
+    public List<Word> getReverseInOrderWords() {
+        List<Word> list = new ArrayList<>();
+        collectReverseInOrder(this.root, list);
+        return list;
     }
-    private void reverseInOrder(Node root) {
-        if (root != null) {
-            reverseInOrder(root.getRight());
-            System.out.println(root.getWord());
-            reverseInOrder(root.getLeft());
+
+    private void collectReverseInOrder(Node root, List<Word> list) {
+        if (root == null) {
+            return;
         }
+
+        collectReverseInOrder(root.getRight(), list);
+        if (root.getWord() != null) {
+            list.add(root.getWord());
+        }
+        collectReverseInOrder(root.getLeft(), list);
     }
+
 
     /**
      * Tìm word bằng substring

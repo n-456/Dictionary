@@ -40,12 +40,18 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.println("===== IN-ORDER =====");
-                    dictionary.printInOrder();
+                    List<Word> sortedWords = dictionary.getInOrderWords();
+                    for (Word w : sortedWords) {
+                        System.out.println(w);
+                    }
                     break;
 
                 case 2:
                     System.out.println("===== REVERSE IN-ORDER =====");
-                    dictionary.printReverseInOrder();
+                    List<Word> sortedWords2 = dictionary.getInOrderWords();
+                    for (Word w : sortedWords2) {
+                        System.out.println(w);
+                    }
                     break;
 
                 case 3:
