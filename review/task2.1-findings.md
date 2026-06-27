@@ -10,12 +10,12 @@
 
 | ID | Vấn đề | File ảnh hưởng | Mức độ (Severity) | Trạng thái |
 | :--- | :--- | :--- | :--- | :--- |
-| **01** | Nuốt ngoại lệ (Exception Swallowing) tại Data Layer | [WordGAO.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/repository/impl/WordGAO.java#L40-L42) | 🔴 **Critical** | Cần sửa ngay |
-| **02** | Lọt ngoại lệ NullPointerException ra khỏi khối try-catch của Controller | [DictionaryController.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/controllers/DictionaryController.java#L20-L24) | 🔴 **Critical** | Cần sửa ngay |
-| **03** | Ghép cứng Swing UI Popup (`JOptionPane`) vào Core Exception Handler | [ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java#L26) | 🟠 **High** | Cần cấu trúc lại |
-| **04** | Sử dụng `NullPointerException` sai mục đích (làm Validation) | [ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java#L12-L15) | 🟠 **High** | Cần sửa logic |
-| **05** | Thiếu hệ thống Custom Exception định nghĩa nghiệp vụ | Toàn bộ Project | 🟡 **Medium** | Khuyến nghị thêm |
-| **06** | In log thô bằng `System.err` và `printStackTrace()` | [ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java#L22-L23) | 🟢 **Low** | Khuyến nghị cải tiến |
+| **01** | Nuốt ngoại lệ (Exception Swallowing) tại Data Layer | [WordGAO.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/repository/impl/WordGAO.java#L40-L42) | 🔴 **Critical** | ✅ Đã giải quyết (Dùng DatabaseException trong WordDAO) |
+| **02** | Lọt ngoại lệ NullPointerException ra khỏi khối try-catch của Controller | [DictionaryController.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/controllers/DictionaryController.java#L20-L24) | 🔴 **Critical** | ✅ Đã giải quyết (Kiểm tra dữ liệu và bọc try-catch trong Listener) |
+| **03** | Ghép cứng Swing UI Popup (`JOptionPane`) vào Core Exception Handler | [ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java#L26) | 🟠 **High** | ✅ Đã giải quyết (Tách riêng UI JOptionPane sang Controller) |
+| **04** | Sử dụng `NullPointerException` sai mục đích (làm Validation) | [ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java#L12-L15) | 🟠 **High** | ✅ Đã giải quyết (Dùng ValidationException để validate) |
+| **05** | Thiếu hệ thống Custom Exception định nghĩa nghiệp vụ | Toàn bộ Project | 🟡 **Medium** | ✅ Đã giải quyết (Thêm các lớp custom exception) |
+| **06** | In log thô bằng `System.err` và `printStackTrace()` | [ExceptionHandler.java](file:///d:/Students%20Reports/Ngoc/Dictionary/src/exception/ExceptionHandler.java#L22-L23) | 🟢 **Low** | ✅ Đã giải quyết (Chuyển sang sử dụng java.util.logging.Logger) |
 
 ---
 
