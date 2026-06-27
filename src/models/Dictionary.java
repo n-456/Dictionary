@@ -92,28 +92,37 @@ public class Dictionary {
         searchSubstringWordRec(subString, root.getRight(), resutlList);
     }
 
-    // SEARCH WORD
-    public Word searchWord(String keyWord) {
-        if (keyWord == null)
+    /**
+     * Tìm word
+     */
+    public Word searchWord(String keyOfWord) {
+        if (keyOfWord == null || keyOfWord.trim().isEmpty()) {
             return null;
-        Node node = searchRec(keyWord, this.root);
+        }
+        Node node = searchRec(keyOfWord.trim(), this.root);
         return (node != null) ? node.getWord() : null;
     }
-    private Node searchRec(String keyWord, Node root) {
+
+    private Node searchRec(String keyOfWord, Node root) {
         if (root == null) {
             return null;
         }
 
-        if (keyWord.compareToIgnoreCase(root.getWord().getKeyOfWord()) == 0) {
+        String keyWordLower = keyOfWord.toLowerCase();
+        String rootWordLower = root.getWord().getKeyOfWord().toLowerCase();
+
+        int cmp = keyWordLower.compareTo(rootWordLower);
+        if (cmp == 0) {
             return root;
         }
 
-        if (keyWord.compareTo(root.getWord().getKeyOfWord().toLowerCase()) < 0) {
-            return searchRec(keyWord, root.getLeft());
+        if (cmp < 0) {
+            return searchRec(keyOfWord, root.getLeft());
         }
 
-        return searchRec(keyWord, root.getRight());
+        return searchRec(keyOfWord, root.getRight());
     }
+
 
     // INSERT WORD
     public void addWord(Word word) {
