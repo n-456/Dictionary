@@ -1,28 +1,24 @@
 package exception;
 
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ExceptionHandler {
+    private static final Logger LOGGER = Logger.getLogger(ExceptionHandler.class.getName());
 
-    public static void handle(Exception e) {
-        String title = "Lỗi Hệ Thống";
-        String message = e.getMessage();
-        int messageType = JOptionPane.ERROR_MESSAGE;
+    // Chỉ thực hiện ghi log hệ thống
+    public static void log(Exception e) {
+        LOGGER.log(Level.SEVERE, "[LOG HỆ THỐNG]: " + e.getMessage(), e);
+    }
 
-        if (e instanceof NullPointerException) {
-            title = "Lỗi Dữ Liệu Rỗng";
-            messageType = JOptionPane.WARNING_MESSAGE;
+    // Lấy thông báo lỗi thân thiện với người dùng
+    public static String getFriendlyMessage(Exception e) {
+        if (e instanceof ValidationException) {
+            return e.getMessage(); // Ví dụ: "Từ khóa không được để trống!"
         }
-        else if (e instanceof IllegalArgumentException) {
-            title = "Dữ Liệu Không Hợp Lệ";
-            messageType = JOptionPane.ERROR_MESSAGE;
+        if (e instanceof DatabaseException) {
+            return "Lỗi truy xuất cơ sở dữ liệu. Vui lòng kiểm tra lại file dữ liệu.";
         }
-
-        // In log lỗi
-        System.err.println("[LOG LỖI]: " + e.toString());
-        e.printStackTrace();
-
-        // Hiển thị hộp thoại popup lỗi cho người dùng xem
-        JOptionPane.showMessageDialog(null, message, title, messageType);
+        return "Đã xảy ra lỗi hệ thống không xác định. Vui lòng liên hệ quản trị viên.";
     }
 }
