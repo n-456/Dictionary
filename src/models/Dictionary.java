@@ -168,4 +168,17 @@ public class Dictionary {
 
         return root;
     }
+
+    /**
+     * Thêm danh sách word (dùng để dựng cây)
+     */
+    public void addAllWord(List<Word> wordList) {
+        if (wordList == null || wordList.isEmpty()) {
+            return;
+        }
+        for (Word word : wordList) {
+            addWord(word);
+        }
+    }
+
 }

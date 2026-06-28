@@ -2,32 +2,35 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class DictionaryView extends JFrame {
-    private JButton btnAdd, btnSearch;
-    private JTextField txtInput;
+    private JPanel pnlCurrent;
+
 
     public DictionaryView() {
-        setSize(400, 200);
+        setTitle("DICTIONARY APPLICATION");
+        setSize(650, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        txtInput = new JTextField(15);
-        btnAdd = new JButton("Add");
-        btnSearch = new JButton("Search");
-
-        JPanel panelContent = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 20));
-        panelContent.add(txtInput);
-        panelContent.add(btnAdd);
-        panelContent.add(btnSearch);
-        add(panelContent);
+        setLayout(new BorderLayout());
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public JTextField getTxtInput() {
-        return txtInput;
-    }
 
-    public void addAddListener(ActionListener l) { btnAdd.addActionListener(l); }
-    public void addSearchListener(ActionListener l) { btnSearch.addActionListener(l); }
+    /**
+     * Đổi giao diện
+     */
+    public void changeContentPanel(JPanel pnlNew) {
+        if (pnlCurrent != null) {
+            // Xoá giao diện cũ
+            remove(pnlCurrent);
+        }
+        pnlCurrent = pnlNew;
+        // Thêm giao diện mới
+        add(pnlCurrent, BorderLayout.CENTER);
+
+        // Cập nhật lại cửa sổ
+        revalidate();
+        repaint();
+    }
 }
