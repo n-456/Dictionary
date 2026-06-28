@@ -40,8 +40,9 @@ public class Main {
             System.out.println("4. Tìm kiếm từ chính xác");
             System.out.println("5. Tìm kiếm từ theo chuỗi con");
             System.out.println("6. Sửa thông tin từ");
+            System.out.println("7. Xoá từ");
             System.out.println("0. Thoát");
-            System.out.print("Nhập lựa chọn (0-6): ");
+            System.out.print("Nhập lựa chọn (0-7): ");
 
             while (!scanner.hasNextInt()) {
                 System.out.print("Cần nhập một số hợp lệ: ");
@@ -189,6 +190,22 @@ public class Main {
                         System.out.println("\n=> Sửa thất bại.");
                     }
                     break;
+
+                case 7:
+                    System.out.println("===== XOÁ TỪ =====");
+                    System.out.print("Nhập từ khóa cần xoá: ");
+                    String deleteKey = scanner.nextLine().trim();
+
+                    if (deleteKey.isEmpty()) {
+                        System.out.println("Từ khóa không được trống.");
+                        break;
+                    }
+
+                    if (dictionary.deleteWord(deleteKey)) {
+                        System.out.println("=> Đã xoá từ \"" + deleteKey + "\"");
+                    } else {
+                        System.out.println("=> Từ không có trong từ điển");
+                    }
 
                 case 0:
                     System.out.println("Đã thoát");

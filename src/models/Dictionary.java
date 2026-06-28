@@ -188,6 +188,72 @@ public class Dictionary {
 
 
     /**
+     * Xoá word
+     */
+    public boolean deleteWord(String keyOfWord) {
+        if (keyOfWord == null || keyOfWord.trim().isEmpty()) {
+            return false;
+        }
+        int countBeforeDelete = this.count;
+        this.root = deleteRec(keyOfWord.trim(), this.root);
+        return (countBeforeDelete != this.count);
+    }
+
+    private Node deleteRec(String keyOfWord, Node root) {
+        if (root == null) {
+            return null;
+        }
+
+        int compare = keyOfWord.compareToIgnoreCase(root.getWord().getKeyOfWord());
+        if (compare < 0) {
+            root.setLeft(deleteRec(keyOfWord, root.getLeft()));
+        } else if (compare > 0) {
+            root.setRight(deleteRec(keyOfWord, root.getRight()));
+        } else {
+            this.count--;
+
+            if (root.getLeft() == null) {
+                return root.getRight();
+            }
+            if (root.getRight() == null) {
+                return root.getLeft();
+            }
+
+            Word minWord = getMinWord(root.getRight());
+            if (minWord != null) {
+                root.setWord(minWord);
+                root.setRight(deleteMin(root.getRight()));
+            } else {
+                return root.getLeft();
+            }
+        }
+
+        return root;
+    }
+
+    private Word getMinWord(Node root) {
+        if (root == null) {
+            return null;
+        }
+        while (root.getLeft() != null) {
+            root = root.getLeft();
+        }
+        return root.getWord();
+    }
+
+    private Node deleteMin(Node root) {
+        if (root == null) {
+            return null;
+        }
+        if (root.getLeft() == null) {
+            return root.getRight();
+        }
+        root.setLeft(deleteMin(root.getLeft()));
+        return root;
+    }
+
+
+    /**
      * Thêm danh sách word (dùng để dựng cây)
      */
     public void addAllWord(List<Word> wordList) {
