@@ -169,6 +169,24 @@ public class Dictionary {
         return root;
     }
 
+
+    /**
+     * Sửa word
+     */
+    public boolean editWord(String keyOfWord, List<TypeOfWord> typeOfWordList) {
+        if (keyOfWord == null || typeOfWordList == null) {
+            return false;
+        }
+        Node resultNode = searchRec(keyOfWord, this.root);
+        if (resultNode == null || resultNode.getWord() == null) {
+            return false;
+        }
+        Word word = resultNode.getWord();
+        word.setTypeOfWordList(new ArrayList<>(typeOfWordList));
+        return true;
+    }
+
+
     /**
      * Thêm danh sách word (dùng để dựng cây)
      */

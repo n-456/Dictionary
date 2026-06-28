@@ -61,7 +61,7 @@ public class SearchController {
         Word wordObj = this.dictionary.searchWord(keyOfWord);
         if (wordObj != null) {
             this.currentKeyOfWord = wordObj.getKeyOfWord();
-            searchScreen.display(this.currentKeyOfWord, wordObj.getTypeOfWord());
+            searchScreen.display(this.currentKeyOfWord, wordObj.getTypeOfWordList());
         } else {
             this.currentKeyOfWord = null;
             searchScreen.showMessage("Không tìm thấy từ này!");

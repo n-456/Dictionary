@@ -39,8 +39,9 @@ public class Main {
             System.out.println("3. Thêm từ mới");
             System.out.println("4. Tìm kiếm từ chính xác");
             System.out.println("5. Tìm kiếm từ theo chuỗi con");
+            System.out.println("6. Sửa thông tin từ");
             System.out.println("0. Thoát");
-            System.out.print("Nhập lựa chọn (0-5): ");
+            System.out.print("Nhập lựa chọn (0-6): ");
 
             while (!scanner.hasNextInt()) {
                 System.out.print("Cần nhập một số hợp lệ: ");
@@ -140,12 +141,61 @@ public class Main {
                     }
                     break;
 
+                case 6:
+                    System.out.println("===== SỬA THÔNG TIN TỪ =====");
+                    System.out.print("Nhập từ khóa cần sửa: ");
+                    String editKey = scanner.nextLine().trim();
+
+                    if (editKey.isEmpty()) {
+                        System.out.println("Từ khóa không được trống.");
+                        break;
+                    }
+
+                    Word existWord = dictionary.searchWord(editKey);
+                    if (existWord == null) {
+                        System.out.println("=> Không tìm thấy từ \"" + editKey + "\" trong từ điển để sửa.");
+                        break;
+                    }
+
+                    // Khởi tạo một danh sách để chứa nhiều TypeOfWord
+                    List<TypeOfWord> newTypesList = new ArrayList<>();
+                    String next;
+                    int editCount = 1;
+
+                    // Vòng lặp cho phép nhập nhiều loại từ / nghĩa khác nhau
+                    do {
+                        System.out.println("\n--- Nhập thông tin nghĩa mới thứ " + editCount + " ---");
+                        System.out.print("Nhập loại từ (Ví dụ: Noun, Verb, Adj...): ");
+                        String type = scanner.nextLine().trim();
+                        System.out.print("Nhập nghĩa tiếng việt: ");
+                        String meaning = scanner.nextLine().trim();
+                        System.out.print("Nhập ví dụ: ");
+                        String explanation = scanner.nextLine().trim();
+
+                        // Thêm nghĩa vừa nhập vào danh sách định sẵn
+                        TypeOfWord newTypeOfWord = new TypeOfWord(meaning, type, explanation);
+                        newTypesList.add(newTypeOfWord);
+
+                        // Hỏi người dùng có muốn nhập tiếp nghĩa, từ loại khác cho từ này không
+                        System.out.print("Nhập thêm nghĩa khác cho từ '" + editKey + "' ? (Y/N): ");
+                        next = scanner.nextLine().trim();
+                        editCount++;
+                    } while (next.equalsIgnoreCase("y"));
+
+                    // Sau khi nhập xong hết các nghĩa, tiến hành sửa từ
+                    if (dictionary.editWord(editKey, newTypesList)) {
+                        System.out.println("\n=> Đã sửa thành công từ \"" + editKey + "\".");
+                    } else {
+                        System.out.println("\n=> Sửa thất bại.");
+                    }
+                    break;
+
                 case 0:
                     System.out.println("Đã thoát");
                     break;
 
                 default:
-                    System.out.println("Lựa chọn không hợp lệ! Lựa chọn từ 0 đến 5.");
+                    System.out.println("Lựa chọn không hợp lệ! Lựa chọn từ 0 đến 6.");
             }
             System.out.println("\n-----------------------------------\n");
         } while (choice != 0);
