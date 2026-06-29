@@ -106,8 +106,8 @@ public class HomeScreen extends JPanel {
 
             // Nối các meaning lại với nhau, cách nhau bởi dấu ";"
             StringBuilder meaningsBuilder = new StringBuilder();
-            if (word.getTypeOfWord() != null) {
-                for (TypeOfWord typeOfWord : word.getTypeOfWord()) {
+            if (word.getTypeOfWordList() != null) {
+                for (TypeOfWord typeOfWord : word.getTypeOfWordList()) {
                     meaningsBuilder.append(typeOfWord.getMeaning()).append("; ");
                 }
             }

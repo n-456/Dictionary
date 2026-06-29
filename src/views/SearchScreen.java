@@ -138,38 +138,37 @@ public class SearchScreen extends JPanel {
 
 
     /**
-     * Hiển thị nghĩa
+     * Hiển thị các typeOfWord qua các block trên giao diện
      */
-    public void display(String keyOfWord, List<TypeOfWord> typeOfWordList) {
-        // Tạo và định dạng chuỗi văn bản
-        StringBuilder sb = new StringBuilder();
-        sb.append(keyOfWord).append(":\n\n");
+    public void displayBlocks(String keyOfWord, List<TypeOfWord> typeOfWordList) {
+        if (lblKeyOfWord != null) {
+            lblKeyOfWord.setText(keyOfWord.toLowerCase());
+        }
 
-        if (typeOfWordList != null) {
-            for (int i = 0; i < typeOfWordList.size(); i++) {
-                TypeOfWord type = typeOfWordList.get(i);
-                sb.append("typeOfWord ").append(i + 1).append(":\n");
-                sb.append("meaning: ").append(type.getMeaning()).append("\n");
-                sb.append("part of speech: ").append(type.getPartOfSpeech()).append("\n");
-                sb.append("example: ").append(type.getExample()).append("\n\n");
+        // Xóa toàn bộ các block cũ hiển thị trên màn hình trước đó
+        container.removeAll();
+
+        // Kiểm tra an toàn dữ liệu đầu vào
+        if (typeOfWordList != null && !typeOfWordList.isEmpty()) {
+
+            // Duyệt qua từng typeOfWord để thêm block
+            for (TypeOfWord typeOfWord : typeOfWordList) {
+                String meaning = typeOfWord.getMeaning();
+                String partOfSpeech = typeOfWord.getPartOfSpeech();
+                String example = typeOfWord.getExample();
+
+                // Thêm block
+                Block block = new Block(meaning, partOfSpeech, example);
+                container.add(block);
+                container.add(Box.createVerticalStrut(10));
             }
         }
 
-        // Cập nhật lên JTextArea
-        container.removeAll();
-
-        JTextArea textArea = new JTextArea();
-        textArea.setText(sb.toString());
-        textArea.setEditable(false);
-        textArea.setBackground(java.awt.Color.WHITE);
-        container.add(textArea);
-        container.add(Box.createVerticalStrut(10));
-
+        // Cập nhật lại giao diện
         container.revalidate();
         container.repaint();
         layoutCenterCard.show(pnlCenterCard, "RESULT");
     }
-
 
 
     /**
@@ -192,4 +191,30 @@ public class SearchScreen extends JPanel {
     public void addHomeScreenListener(ActionListener l) { btnHomeScreen.addActionListener(l); }
 
 
+    /**
+     * Lớp nội (inner class):
+     * Là một khối đồ hoạ trên giao diện, hiển thị các thông tin typeOfWord
+     * Thông tin gồm meaning (nghĩa), partOfSpeech (từ loại), example (ví dụ)
+     */
+    private class Block extends JPanel {
+        public Block(String meaning, String partOfSpeech, String example) {
+            setBackground(Color.WHITE);
+            setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
+            setLayout(new GridLayout(3, 2, 5, 8));
+            setPreferredSize(new Dimension(500, 100));
+            setMaximumSize(new Dimension(Short.MAX_VALUE, 100));
+
+            add(new JLabel("Meaning:"));
+            JLabel lblMeaning = new JLabel(meaning); lblMeaning.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            add(lblMeaning);
+
+            add(new JLabel("Part of speech:"));
+            JLabel lblPartOfSpeech = new JLabel(partOfSpeech); lblPartOfSpeech.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            add(lblPartOfSpeech);
+
+            add(new JLabel("Example:"));
+            JLabel lblExample = new JLabel(example); lblExample.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            add(lblExample);
+        }
+    }
 }

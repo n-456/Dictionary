@@ -1,7 +1,7 @@
 [
   {
     "keyOfWord": "set of china",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "bộ gốm sứ",
@@ -11,7 +11,7 @@
   },
   {
     "keyOfWord": "rare breeds section",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "khu giống hiếm",
@@ -21,7 +21,7 @@
   },
   {
     "keyOfWord": "grazing area",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "khu chăn thả",
@@ -31,7 +31,7 @@
   },
   {
     "keyOfWord": "experimental crops area",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "khu trồng trọt thí nghiệm",
@@ -41,7 +41,7 @@
   },
   {
     "keyOfWord": "marsh",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "đầm lầy",
@@ -51,7 +51,7 @@
   },
   {
     "keyOfWord": "temporarily out of bound to the public",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "đóng cửa tạm thời đối với công chúng",
@@ -61,7 +61,7 @@
   },
   {
     "keyOfWord": "large signs",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "các biển báo lớn",
@@ -71,7 +71,7 @@
   },
   {
     "keyOfWord": "breed",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "giống loài động vật",
@@ -81,7 +81,7 @@
   },
   {
     "keyOfWord": "quarantine service",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "dịch vụ kiểm dịch hàng hóa",
@@ -91,9 +91,9 @@
   },
   {
     "keyOfWord": "infested with mites",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
-        "typeOfWord": [
+        "typeOfWordList": [
           {
             "partOfSpeech": "Noun",
             "meaning": "bị nhiễm bọ, ve chó",
@@ -105,7 +105,7 @@
   },
   {
     "keyOfWord": "microscopic creature",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "sinh vật cực nhỏ, kích thước hiển vi",
@@ -115,7 +115,7 @@
   },
   {
     "keyOfWord": "eradicated",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "loại bỏ",
@@ -125,7 +125,7 @@
   },
   {
     "keyOfWord": "unemployed",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Adjective",
         "meaning": "thất nghiệp",
@@ -135,7 +135,7 @@
   },
   {
     "keyOfWord": "aim",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "mục tiêu",
@@ -145,7 +145,7 @@
   },
   {
     "keyOfWord": "reform",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Pronoun",
         "meaning": "cải tổ",
@@ -155,7 +155,7 @@
   },
   {
     "keyOfWord": "misrepresented",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Verb",
         "meaning": "trình bày sai, làm hiểu sai",
@@ -165,7 +165,7 @@
   },
   {
     "keyOfWord": "press",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "báo chí",
@@ -175,7 +175,7 @@
   },
   {
     "keyOfWord": "preferences",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "những sự ưa thích",
@@ -185,7 +185,7 @@
   },
   {
     "keyOfWord": "rationale",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "lý do, cơ sở luận, căn cứ hợp lý",
@@ -195,7 +195,7 @@
   },
   {
     "keyOfWord": "collating",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Verb",
         "meaning": "đối chiếu sắp xếp dữ liệu",
@@ -205,7 +205,7 @@
   },
   {
     "keyOfWord": "tutor",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "gia sư",
@@ -215,7 +215,7 @@
   },
   {
     "keyOfWord": "pull out",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Verb",
         "meaning": "rút khỏi, rút lui khỏi",
@@ -225,7 +225,7 @@
   },
   {
     "keyOfWord": "undergraduate",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "Sinh viên đại học chưa tốt nghiệp",
@@ -235,7 +235,7 @@
   },
   {
     "keyOfWord": "reassurance",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Noun",
         "meaning": "Sự cam đoan, đảm bảo",
@@ -245,7 +245,7 @@
   },
   {
     "keyOfWord": "traceable",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Adjective",
         "meaning": "Có thể truy vết được",
@@ -255,7 +255,7 @@
   },
   {
     "keyOfWord": "bizarre",
-    "typeOfWord": [
+    "typeOfWordList": [
       {
         "partOfSpeech": "Adjective",
         "meaning": "Sự kỳ quái",

@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Word {
     private String keyOfWord;
-    private List<TypeOfWord> typeOfWord;
+    private List<TypeOfWord> typeOfWordList;
 
 
     // Constructor
-    public Word(String keyOfWord, List<TypeOfWord> typeOfWord) {
+    public Word(String keyOfWord, List<TypeOfWord> typeOfWordList) {
         this.keyOfWord = keyOfWord.trim().toLowerCase();
-        this.typeOfWord = typeOfWord;
+        this.typeOfWordList = typeOfWordList;
     }
 
 
@@ -23,19 +23,19 @@ public class Word {
         this.keyOfWord = keyOfWord.trim().toLowerCase();
     }
 
-    public List<TypeOfWord> getTypeOfWord() {
-        return typeOfWord;
+    public List<TypeOfWord> getTypeOfWordList() {
+        return typeOfWordList;
     }
 
-    public void setTypeOfWord(List<TypeOfWord> typeOfWord) {
-        this.typeOfWord = typeOfWord;
+    public void setTypeOfWordList(List<TypeOfWord> typeOfWordList) {
+        this.typeOfWordList = typeOfWordList;
     }
 
 
     @Override
     public String toString() {
         return "\n"   + keyOfWord +
-                ": \n" + typeOfWord +
+                ": \n" + typeOfWordList +
                 "\n";
     }
 }
