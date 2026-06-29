@@ -41,7 +41,9 @@ public class SearchController {
         });
 
         this.searchScreen.addEditListener(e -> {
-
+            if (currentKeyOfWord != null) {
+                dictionaryController.switchScreen("ADDOREDIT_SCREEN", currentKeyOfWord, true);
+            }
         });
 
         this.searchScreen.addDeleteListener(e -> {
