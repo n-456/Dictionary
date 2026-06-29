@@ -1,70 +1,72 @@
 package controllers;
 
 import exception.ExceptionHandler;
-import exception.ValidationException;
 import models.Dictionary;
 import models.Word;
+import repository.WordRepository;
+import repository.impl.WordDAO;
+import views.AddOrEditScreen;
 import views.DictionaryView;
+import views.HomeScreen;
+import views.SearchScreen;
 
 import javax.swing.*;
+import java.util.List;
+
 
 public class DictionaryController {
-    private Dictionary dictionary;
     private DictionaryView dictionaryView;
+    private Dictionary dictionary;
+    private String filePath;
 
 
-    public DictionaryController() {
-        dictionary = new Dictionary();
+    public DictionaryController(String filePath) {
         dictionaryView = new DictionaryView();
+        dictionary = new Dictionary();
+        this.filePath = filePath;
+
+        try {
+            WordRepository wordRepository = new WordDAO(this.filePath);
+            List<Word> wordList = wordRepository.loadAllWords();
+            dictionary.addAllWord(wordList);
+        } catch (Exception e) {
+            ExceptionHandler.log(e);
+            String errorMsg = ExceptionHandler.getFriendlyMessage(e);
+            JOptionPane.showMessageDialog(null, errorMsg, "Lỗi Khởi Động", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 
-        dictionaryView.addAddListener(e -> {
-            try {
-                String wordName = dictionaryView.getTxtInput().getText();
-
-                // 1. Kiểm tra đầu vào chủ động (Validation)
-                if (wordName == null || wordName.trim().isEmpty()) {
-                    throw new ValidationException("Từ khóa cần thêm không được để trống!");
-                }
-
-                // 2. Thực hiện nghiệp vụ an toàn
-                Word word = new Word(wordName.trim(), null);
-                dictionary.addWord(word);
-
-                // 3. Thông báo thành công trực tiếp tại View context
-                JOptionPane.showMessageDialog(dictionaryView, "Thêm từ thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
-            } catch (Exception ex) {
-                // Log lỗi hệ thống
-                ExceptionHandler.log(ex);
-
-                // Hiển thị lỗi thân thiện dựa trên ngữ cảnh View
-                String friendlyMessage = ExceptionHandler.getFriendlyMessage(ex);
-                JOptionPane.showMessageDialog(dictionaryView, friendlyMessage, "Lỗi xảy ra", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
-        dictionaryView.addSearchListener(e -> {
-            try {
-                String keyWord = dictionaryView.getTxtInput().getText();
-                Word result = dictionary.searchWord(keyWord);
-                System.out.println("=== Từ cần tìm ===");
-                System.out.println(result);
-            } catch (Exception ex) {
-                // Log lỗi hệ thống
-                ExceptionHandler.log(ex);
-
-                // Hiển thị lỗi thân thiện dựa trên ngữ cảnh View
-                String friendlyMessage = ExceptionHandler.getFriendlyMessage(ex);
-                JOptionPane.showMessageDialog(dictionaryView, friendlyMessage, "Lỗi xảy ra", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+    /**
+     * Khởi chạy ứng dụng
+     */
+    public void start() {
+        // Đặt homeScreen làm giao diện chính mặc định
+        switchScreen("HOME_SCREEN", null, false);
 
         dictionaryView.setVisible(true);
     }
 
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new DictionaryController());
+    /**
+     * Chuyển đổi giữa các giao diện chính (homeScreen, addOrEditScreen, searchScreen)
+     */
+    public void switchScreen(String screenName, String targetKeyOfWord, boolean isEditMode) {
+        if (screenName.equals("SEARCH_SCREEN")) {
+            SearchScreen searchScreen = new SearchScreen();
+            new SearchController(this, searchScreen, dictionary, targetKeyOfWord);
+            dictionaryView.changeContentPanel(searchScreen);
+
+        } else if (screenName.equals("ADDOREDIT_SCREEN")) {
+            AddOrEditScreen addOrEditScreen = new AddOrEditScreen();
+            new AddOrEditController(this, addOrEditScreen, dictionary, targetKeyOfWord, isEditMode);
+            dictionaryView.changeContentPanel(addOrEditScreen);
+
+        } else {
+            HomeScreen homeScreen = new HomeScreen();
+            new HomeController(this, homeScreen, dictionary);
+            dictionaryView.changeContentPanel(homeScreen);
+
+        }
     }
 }
