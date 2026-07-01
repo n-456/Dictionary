@@ -1,5 +1,7 @@
 package views;
 
+import models.TypeOfWord;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -106,6 +108,12 @@ public class AddOrEditScreen extends JPanel {
 
 
     /**
+     * Lấy giá trị keyOfWord từ ô nhập
+     */
+    public String getKeyOfWord() { return txtKeyOfWord.getText().trim(); }
+
+
+    /**
      * Gán giá trị keyOfWord cho ô nhập
      */
     public void setKeyOfWord(String keyOfWord) { txtKeyOfWord.setText(keyOfWord); }
@@ -115,6 +123,52 @@ public class AddOrEditScreen extends JPanel {
      * Thay đổi quyền chỉnh sửa của ô nhập keyOfWord
      */
     public void setKeyOfWordEditable(boolean editable) { txtKeyOfWord.setEditable(editable); }
+
+
+    /**
+     * Kiểm tra xem có block nào điền không đủ meaning, part of speech hoặc example không.
+     * trả true nếu có block không hợp lệ, false nếu tất cả hợp lệ.
+     */
+    public boolean hasInvalidBlock() {
+        for (Block block : blockList) {
+            String meaning = block.getMeaningValue();
+            String partOfSpeech = block.getPartOfSpeechValue();
+            String example = block.getExampleValue();
+
+            // Nếu chỉ nhập nghĩa, từ loại hoặc ví dụ là không hợp lệ
+            if ((meaning.isEmpty()|| partOfSpeech.isEmpty() || example.isEmpty())
+                    && !(meaning.isEmpty() && partOfSpeech.isEmpty() && example.isEmpty())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Lấy danh sách các typeOfWord dựa trên dữ liệu được nhập vào các block
+     */
+    public List<TypeOfWord> getAllTypeOfWord() {
+        List<TypeOfWord> data = new ArrayList<>();
+        for (Block block : blockList) {
+            String meaning = block.getMeaningValue();
+            String partOfSpeech = block.getPartOfSpeechValue();
+            String example = block.getExampleValue();
+
+            if (!meaning.isEmpty() && !partOfSpeech.isEmpty() && !example.isEmpty()) {
+                data.add(new TypeOfWord(meaning, partOfSpeech, example));
+            }
+        }
+        return data;
+    }
+
+
+    /**
+     * Lấy số lượng block hiện tại
+     */
+    public int countBlock() {
+        return blockList.size();
+    }
 
 
     /**
@@ -144,6 +198,14 @@ public class AddOrEditScreen extends JPanel {
      */
     public void showWarning(String message) {
         JOptionPane.showMessageDialog(this, message, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+    }
+
+
+    /**
+     * Hiển thị hộp thoại thông báo thành công
+     */
+    public void showSuccess(String message) {
+        JOptionPane.showMessageDialog(this, message, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
     }
 
 
