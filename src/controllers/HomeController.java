@@ -13,6 +13,8 @@ public class HomeController {
     private HomeScreen homeScreen;
     private Dictionary dictionary;
 
+    private boolean isAscending = true;     // Biến quy định thứ tự sắp xếp các word: mặc định tăng dần A-Z
+
 
     public HomeController(DictionaryController dictionaryController, HomeScreen homeScreen, Dictionary dictionary) {
         this.dictionaryController = dictionaryController;
@@ -37,7 +39,19 @@ public class HomeController {
         });
 
         this.homeScreen.addSortListener(e -> {
-
+            try {
+                isAscending = !isAscending;
+                if (isAscending) {
+                    List<Word> data = this.dictionary.getInOrderWords();
+                    this.homeScreen.refreshTable(data);
+                } else {
+                    List<Word> data = this.dictionary.getReverseInOrderWords();
+                    this.homeScreen.refreshTable(data);
+                }
+            } catch (Exception ex) {
+                ExceptionHandler.log(ex);
+                homeScreen.showMessage(ExceptionHandler.getFriendlyMessage(ex));
+            }
         });
 
         this.homeScreen.addAddListener(e -> {
