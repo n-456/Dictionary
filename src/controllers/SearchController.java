@@ -33,7 +33,7 @@ public class SearchController {
         this.searchScreen.addSearchListener(e -> {
             String query = searchScreen.getSearchKeyOfWord().trim().toLowerCase();
             if (query.isEmpty()) {
-                searchScreen.showMessage("Vui lòng nhập từ cần tìm kiếm!");
+                searchScreen.showMessage("Vui lòng nhập vào ô tìm kiếm!");
                 searchScreen.showEmptyPanel();
                 return;
             }
@@ -41,7 +41,9 @@ public class SearchController {
         });
 
         this.searchScreen.addEditListener(e -> {
-
+            if (currentKeyOfWord != null) {
+                dictionaryController.switchScreen("ADDOREDIT_SCREEN", currentKeyOfWord, true);
+            }
         });
 
         this.searchScreen.addDeleteListener(e -> {
@@ -61,10 +63,10 @@ public class SearchController {
         Word wordObj = this.dictionary.searchWord(keyOfWord);
         if (wordObj != null) {
             this.currentKeyOfWord = wordObj.getKeyOfWord();
-            searchScreen.display(this.currentKeyOfWord, wordObj.getTypeOfWordList());
+            searchScreen.displayBlocks(this.currentKeyOfWord, wordObj.getTypeOfWordList());
         } else {
             this.currentKeyOfWord = null;
-            searchScreen.showMessage("Không tìm thấy từ này!");
+            searchScreen.showMessage("Không tìm thấy " + keyOfWord + "!");
             searchScreen.showEmptyPanel();
         }
     }

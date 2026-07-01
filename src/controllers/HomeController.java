@@ -41,11 +41,19 @@ public class HomeController {
         });
 
         this.homeScreen.addAddListener(e -> {
-
+            dictionaryController.switchScreen("ADDOREDIT_SCREEN", null, false);
         });
 
         this.homeScreen.addEditListener(e -> {
-
+            try {
+                String selectedWord = homeScreen.getSelectedKeyOfWord();
+                if (selectedWord == null || selectedWord.trim().isEmpty()) {
+                    throw new ValidationException("Vui lòng chọn một từ để sửa!");
+                }
+                dictionaryController.switchScreen("ADDOREDIT_SCREEN", selectedWord, true);
+            } catch (Exception ex) {
+                homeScreen.showMessage(ExceptionHandler.getFriendlyMessage(ex));
+            }
         });
 
         this.homeScreen.addDeleteListener(e -> {
