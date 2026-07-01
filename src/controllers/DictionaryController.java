@@ -5,6 +5,7 @@ import models.Dictionary;
 import models.Word;
 import repository.WordRepository;
 import repository.impl.WordDAO;
+import views.AddOrEditScreen;
 import views.DictionaryView;
 import views.HomeScreen;
 import views.SearchScreen;
@@ -55,6 +56,11 @@ public class DictionaryController {
             SearchScreen searchScreen = new SearchScreen();
             new SearchController(this, searchScreen, dictionary, targetKeyOfWord);
             dictionaryView.changeContentPanel(searchScreen);
+
+        } else if (screenName.equals("ADDOREDIT_SCREEN")) {
+            AddOrEditScreen addOrEditScreen = new AddOrEditScreen();
+            new AddOrEditController(this, addOrEditScreen, dictionary, targetKeyOfWord, isEditMode);
+            dictionaryView.changeContentPanel(addOrEditScreen);
 
         } else {
             HomeScreen homeScreen = new HomeScreen();
