@@ -93,12 +93,15 @@ public class HomeScreen extends JPanel {
     /**
      * Làm mới dữ liệu của bảng khi có thay đổi
      */
-    public void updateTable(List<Word> wordList) {
+    public void refreshTable(List<Word> wordList) {
         // Lấy model của bảng để thao tác dữ liệu
         DefaultTableModel model = (DefaultTableModel) table.getModel();
 
         // Xóa dữ liệu cũ đang hiển thị trên bảng
         model.setRowCount(0);
+
+        // Kiểm tra an toàn dữ liệu đầu vào
+        if (wordList == null) return;
 
         // Duyệt qua từng word để đưa vào bảng
         for (Word word : wordList) {

@@ -19,7 +19,7 @@ public class HomeController {
         this.homeScreen = homeScreen;
         this.dictionary = dictionary;
 
-        refreshTable();
+        refreshScreen();
 
 
         // Xử lý các sự kiện
@@ -57,7 +57,19 @@ public class HomeController {
         });
 
         this.homeScreen.addDeleteListener(e -> {
-
+            try {
+                String selectedWord = homeScreen.getSelectedKeyOfWord();
+                if (selectedWord == null || selectedWord.trim().isEmpty())  {
+                    throw new ValidationException("Vui lòng chọn một từ để xoá!");
+                }
+                if (!this.dictionary.deleteWord(selectedWord)) {
+                    throw new ValidationException("'" + selectedWord + "' không có trong từ điển!");
+                }
+                refreshScreen();
+                homeScreen.showMessage("Đã xóa từ thành công!");
+            } catch (Exception ex) {
+                homeScreen.showMessage(ExceptionHandler.getFriendlyMessage(ex));
+            }
         });
     }
 
@@ -65,17 +77,11 @@ public class HomeController {
     /**
      * Cập nhật bảng của giao diện homeScreen
      */
-    private void refreshTable() {
+    private void refreshScreen() {
         try {
             List<Word> data = this.dictionary.getInOrderWords();
-            this.homeScreen.updateTable(data);
-
-            if (data == null || data.isEmpty()) {
-                throw new ValidationException("Không có từ trong từ điển.");
-            }
-
+            this.homeScreen.refreshTable(data);
             this.homeScreen.setEnable(true);
-
         } catch (Exception ex) {
             this.homeScreen.setEnable(false);
             homeScreen.showMessage(ExceptionHandler.getFriendlyMessage(ex));

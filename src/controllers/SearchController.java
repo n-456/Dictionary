@@ -47,7 +47,15 @@ public class SearchController {
         });
 
         this.searchScreen.addDeleteListener(e -> {
+            if (currentKeyOfWord == null) return;
 
+            if (!this.dictionary.deleteWord(currentKeyOfWord)) {
+                searchScreen.showMessage("'" + currentKeyOfWord + "' không có trong từ điển!");
+                return;
+            }
+            this.currentKeyOfWord = null;
+            searchScreen.setSearchKeyOfWord("");
+            searchScreen.showEmptyPanel();
         });
 
         this.searchScreen.addHomeScreenListener(e -> {
